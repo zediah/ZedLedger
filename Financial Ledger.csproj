@@ -1,0 +1,238 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{90BB030E-4B96-46F7-82AC-ACD517B1BAAE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FinancialLedgerProject</RootNamespace>
+    <AssemblyName>ZaFinancialLedger</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>FLIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Core\DbConnection.cs" />
+    <Compile Include="Core\ZaDisplayView.cs" />
+    <Compile Include="Core\ExtendedObjects\ZaDataGridViewExpanderRow.cs" />
+    <Compile Include="Core\ExtendedObjects\ZaDataGridViewCalendarColumn.cs" />
+    <Compile Include="Core\ExtendedObjects\ZaCalendarCellControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ExtendedObjects\ZaDataGridViewCalendarCell.cs" />
+    <Compile Include="Core\ExtendedObjects\ZaNumericTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ExtendedObjects\ZaDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Core\ExtendedObjects\ZaBindingList.cs" />
+    <Compile Include="Ledger Item\ZaLedgerItemDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ledger Item\ZaLedgerItemDialog.Designer.cs">
+      <DependentUpon>ZaLedgerItemDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\Budget\ZaBudgetDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\Budget\ZaBudgetDialog.Designer.cs">
+      <DependentUpon>ZaBudgetDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\Budget\ZaBudgetItem.cs" />
+    <Compile Include="Reference\Budget\ZaBudget.cs" />
+    <Compile Include="Reference\ExpenseType\ZaSecondaryExpenseTypeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\ExpenseType\ZaSecondaryExpenseTypeDialog.Designer.cs">
+      <DependentUpon>ZaSecondaryExpenseTypeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZaVBudgetItem.cs" />
+    <Compile Include="ZaLedgerSplash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZaLedgerSplash.Designer.cs">
+      <DependentUpon>ZaLedgerSplash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccounts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccounts.Designer.cs">
+      <DependentUpon>ZaAccounts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\ExpenseType\ZaSecondaryExpenseType.cs" />
+    <Compile Include="Reference\ExpenseType\ZaMetaExpenseTypeControl.cs" />
+    <Compile Include="Reference\ExpenseType\ZaMetaExpenseType.cs" />
+    <Compile Include="Reference\ExpenseType\ZaExpenseTypes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\ExpenseType\ZaExpenseTypes.Designer.cs">
+      <DependentUpon>ZaExpenseTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\ZaFrSystem.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="System\ZaFrSystem.Designer.cs">
+      <DependentUpon>ZaFrSystem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="System\ZaSystem.cs" />
+    <Compile Include="Views\ZaVExpenseType.cs" />
+    <Compile Include="ZaFinancialLedgerMDI.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ZaFinancialLedgerMDI.Designer.cs">
+      <DependentUpon>ZaFinancialLedgerMDI.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccountDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccountDialog.Designer.cs">
+      <DependentUpon>ZaAccountDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccount.cs" />
+    <Compile Include="Core\ZafrDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Core\ZafrDialog.Designer.cs">
+      <DependentUpon>ZafrDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs" />
+    <Compile Include="Core\PrimaryObject.cs" />
+    <Compile Include="Reference\ExpenseType\ZaExpenseTypeDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\ExpenseType\ZaExpenseTypeDialog.Designer.cs">
+      <DependentUpon>ZaExpenseTypeDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\ExpenseType\ZaExpenseType.cs" />
+    <Compile Include="Ledger\ZafrFinancialLedger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ledger\ZafrFinancialLedger.Designer.cs">
+      <DependentUpon>ZafrFinancialLedger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Ledger Item\ZaLedgerItem.cs" />
+    <Compile Include="Ledger\ZaLedger.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Core\ExtendedObjects\ZaDataGridView.resx">
+      <DependentUpon>ZaDataGridView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ledger Item\ZaLedgerItemDialog.resx">
+      <DependentUpon>ZaLedgerItemDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reference\Budget\ZaBudgetDialog.resx">
+      <DependentUpon>ZaBudgetDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reference\ExpenseType\ZaSecondaryExpenseTypeDialog.resx">
+      <DependentUpon>ZaSecondaryExpenseTypeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZaLedgerSplash.resx">
+      <DependentUpon>ZaLedgerSplash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reference\Accounts\ZaAccounts.resx">
+      <DependentUpon>ZaAccounts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reference\ExpenseType\ZaExpenseTypes.resx">
+      <DependentUpon>ZaExpenseTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="System\ZaFrSystem.resx">
+      <DependentUpon>ZaFrSystem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ZaFinancialLedgerMDI.resx">
+      <DependentUpon>ZaFinancialLedgerMDI.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reference\Accounts\ZaAccountDialog.resx">
+      <DependentUpon>ZaAccountDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Core\ZafrDialog.resx">
+      <DependentUpon>ZafrDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reference\ExpenseType\ZaExpenseTypeDialog.resx">
+      <DependentUpon>ZaExpenseTypeDialog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ledger\ZafrFinancialLedger.resx">
+      <DependentUpon>ZafrFinancialLedger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="Properties\DataSources\FinancialLedgerProject.Accounts.ZaAccount.datasource" />
+    <None Include="Properties\DataSources\FinancialLedgerProject.ExpenseType.ZaExpenseType.datasource" />
+    <None Include="Properties\DataSources\FinancialLedgerProject.Reference.TransferType.ZaExpenseType.datasource" />
+    <None Include="Properties\DataSources\ZaLedger.datasource" />
+    <None Include="Properties\DataSources\ZaLedgerItem.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="FLIcon.ico" />
+    <None Include="Images\LedgerSplashBackground.bmp" />
+    <None Include="Resources\SplashBackground.bmp" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
