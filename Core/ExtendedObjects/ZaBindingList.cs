@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 
 namespace FinancialLedgerProject.Core.ExtendedObjects
 {
-    public class ZaBindingList<T> : BindingList<T>, IBindingListView
+    public class ZaBindingList<T> : BindingList<T>, IBindingListView where T: PrimaryObject
     {
         /// <summary>
         /// Whether the control is filtered or not
@@ -28,14 +28,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
         /// </summary>
         List<T> ModifiedList
         {
-            get
-            {
-                if (modifiedList == null)
-                {
-                    modifiedList = new List<T>();
-                }
-                return modifiedList;
-            }
+            get { return modifiedList ?? (modifiedList = new List<T>()); }
             set
             {
                 modifiedList = value;
@@ -49,14 +42,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
         /// </summary>
         List<T> UnModifiedList
         {
-            get
-            {
-                if (unModifiedList == null)
-                {
-                    unModifiedList = new List<T>();
-                }
-                return unModifiedList;
-            }
+            get { return unModifiedList ?? (unModifiedList = new List<T>()); }
             set
             {
                 unModifiedList = value;
@@ -314,11 +300,11 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
                 // Call Sort on the ArrayList.
                 if (direction == ListSortDirection.Ascending)
                 {
-                    ModifiedList = ModifiedList.OrderBy(x => prop.GetValue(x)).ToList();
+                    ModifiedList = ModifiedList.OrderBy(prop.GetValue).ToList();
                 }
                 else
                 {
-                    ModifiedList = ModifiedList.OrderByDescending(x => prop.GetValue(x)).ToList();
+                    ModifiedList = ModifiedList.OrderByDescending(prop.GetValue).ToList();
                 }
 
                 for (int i = 0; i < this.Count; i++)
@@ -365,7 +351,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             {
                 foreach (T t in list)
                 {
-                    this.Add(t);
+                    Add(t);
                 }
             }
         }
@@ -375,7 +361,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             // Set the dbseqnum if this object can have one
             if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
             {
-                (((T)item) as PrimaryObject).SetDbseqnum<T>(this);
+                item.SetDbseqnum(this);
             }
             base.Add(item);
         }

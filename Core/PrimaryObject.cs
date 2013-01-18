@@ -63,21 +63,16 @@ namespace FinancialLedgerProject.Core
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
-        public void SetDbseqnum<T>(IEnumerable<T> array)
+        public void SetDbseqnum<T>(IEnumerable<T> array) where T: PrimaryObject
         {
-            var list = from PrimaryObject n in array
-                         select n.Dbseqnum;
-            if (list.Count() > 0)
+            var list = array.Select(x => x.Dbseqnum);
+            if (list.Any())
             {
                 // Only set the dbseqnum if it is not already set.
                 if (Dbseqnum < 1)
                 {
-                    // Talk about an extended, complicated value.
-                    // Take a range of 1 (lowest value) to the biggest number + 1 in the list. 
-                    // Then, ignore everything already in the list
-                    // Next, order it by ascending - that way the smallest number available will be first, then take the first
-                    // This should be the next dbseqnum filling in the gaps!...maybe we shouldn't fill the gaps, sigh.
-                    this.Dbseqnum = Enumerable.Range(1, list.Max() + 1).Except(list).OrderBy(num => num).First();
+                   // All we need is the next value, don't re-use dbseqnums
+                    this.Dbseqnum = list.Max() + 1;
                 }
             }
             else
