@@ -44,6 +44,11 @@ namespace FinancialLedgerProject.Core
         public bool DateRangeSelected { get; set; }
 
         /// <summary>
+        /// Reference to the item this row represents
+        /// </summary>
+        public PrimaryObject BoundItem { get; set; }
+
+        /// <summary>
         /// List of types of views possible
         /// </summary>
         public enum ViewTypes

@@ -44,12 +44,12 @@ namespace FinancialLedgerProject.Ledger_Item
             {
                 MaxItemValue = LedgerItem.PurchasePrice;
             }
-            accountCombo.DataSource = Ledger.Accounts;
+            accountCombo.DataSource = MockDb.Database.Accounts.ToList();
             accountCombo.DisplayMember = "Label";
             accountCombo.ValueMember = "Self";
             accountCombo.SelectedItem = LedgerItem.Account;
 
-            expenseTypeCombo.DataSource = Ledger.ExpenseTypes;
+            expenseTypeCombo.DataSource = MockDb.Database.ExpenseTypes.ToList();
             expenseTypeCombo.DisplayMember = "Label";
             expenseTypeCombo.ValueMember = "Self";
             expenseTypeCombo.SelectedItem = LedgerItem.ExpenseType;
@@ -97,7 +97,7 @@ namespace FinancialLedgerProject.Ledger_Item
             // Clear the selected item
             secondaryExpenseTypeCombo.SelectedItem = null;
             // Now set up the data source
-            secondaryExpenseTypeCombo.DataSource = Ledger.SecondaryExpenseTypes.Where(x => x.dsExpenseType == expense).ToList();
+            secondaryExpenseTypeCombo.DataSource = MockDb.Database.SecondaryExpenseTypes.Where(x => x.dsExpenseType == expense).ToList();
         }
 
     }

@@ -35,20 +35,6 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             }
         }
 
-        private List<T> unModifiedList;
-
-        /// <summary>
-        /// The original list for this control before filtering/sorting
-        /// </summary>
-        List<T> UnModifiedList
-        {
-            get { return unModifiedList ?? (unModifiedList = new List<T>()); }
-            set
-            {
-                unModifiedList = value;
-            }
-        }
-
         /// <summary>
         /// Whether the list is currently sorted or not
         /// </summary>
@@ -105,16 +91,6 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
         }
 
         /// <summary>
-        /// Get the full list before sorting/filtering
-        /// </summary>
-        /// <returns>The current full list</returns>
-        public List<T> GetFullList()
-        {
-            return isFiltered ? UnModifiedList : this.Items.ToList();
-        }
-
-
-        /// <summary>
         /// This method will filter the list based upon the filter string 
         /// </summary>
         protected virtual void UpdateFilter()
@@ -126,6 +102,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             }
             else
             {
+                var UnModifiedList = MockDb.Database.GetRelatedTable<T>();
                 string propertyName, value, sign;
                 char[] acceptableExpressionSigns = { '>', '<', '=' };
                 List<string> filterExpressions = new List<string>();
@@ -150,11 +127,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
                         value = s.Substring(index + 1, s.Length - (index + 1)).Trim().ToLower();
                         sign = s[index].ToString();
                     }
-                    // Preserve the unmodified list
-                    if (UnModifiedList.Count == 0)
-                    {
-                        UnModifiedList.AddRange(this);
-                    }
+
                     IEnumerable<T> tempList = Enumerable.Empty<T>();
                     ClearItems();
                     foreach (PropertyDescriptor prop in TypeDescriptor.GetProperties(typeof(T)))
@@ -268,11 +241,8 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
         {
             RaiseListChangedEvents = false;
             isFiltered = false;
-            if (UnModifiedList.Count > 0)
-            {
-                ClearItems();
-                AddRange(UnModifiedList);
-            }
+            ClearItems();
+            AddRange(MockDb.Database.GetRelatedTable<T>());
             FilterString = "";
             RaiseListChangedEvents = true;
             OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
@@ -292,11 +262,6 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
                 ModifiedList.Clear();
                 // Prepare the modified list and preserve old list
                 ModifiedList.AddRange(Items);
-                // We only want to update the list if it wasn't updated already...
-                if (UnModifiedList.Count == 0)
-                {
-                    UnModifiedList.AddRange(Items);
-                }
                 // Call Sort on the ArrayList.
                 if (direction == ListSortDirection.Ascending)
                 {
@@ -361,7 +326,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             // Set the dbseqnum if this object can have one
             if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
             {
-                item.SetDbseqnum(this);
+                item.SetDbseqnum<T>();
             }
             base.Add(item);
         }
@@ -371,22 +336,14 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
             {
                 object o = Activator.CreateInstance(typeof(T));
-                ((PrimaryObject)o).SetDbseqnum<T>(this);
                 e.NewObject = o;
-                // Add the new item to the unmodified list so we don't lose it...
-                if (isFiltered || isSortedValue)
-                {
-                    UnModifiedList.Add((T)o);
-                }
+                MockDb.Database.Add(((T)o));
             }
         }
 
         protected override void RemoveItem(int index)
         {
-            if (isFiltered || isSortedValue)
-            {
-                UnModifiedList.Remove(this[index]);
-            }
+            MockDb.Database.Remove(this[index]);
             base.RemoveItem(index);
         }
 

@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\MockDb.cs" />
     <Compile Include="Core\DbConnection.cs" />
     <Compile Include="Core\ZaDisplayView.cs" />
     <Compile Include="Core\ExtendedObjects\ZaDataGridViewExpanderRow.cs" />
@@ -74,6 +75,12 @@
     </Compile>
     <Compile Include="Ledger Item\ZaLedgerItemDialog.Designer.cs">
       <DependentUpon>ZaLedgerItemDialog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccountTransfer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reference\Accounts\ZaAccountTransfer.Designer.cs">
+      <DependentUpon>ZaAccountTransfer.cs</DependentUpon>
     </Compile>
     <Compile Include="Reference\Budget\ZaBudgetDialog.cs">
       <SubType>Form</SubType>
@@ -111,13 +118,13 @@
     <Compile Include="Reference\ExpenseType\ZaExpenseTypes.Designer.cs">
       <DependentUpon>ZaExpenseTypes.cs</DependentUpon>
     </Compile>
-    <Compile Include="System\ZaFrSystem.cs">
+    <Compile Include="SystemInfo\ZaFrSystem.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="System\ZaFrSystem.Designer.cs">
+    <Compile Include="SystemInfo\ZaFrSystem.Designer.cs">
       <DependentUpon>ZaFrSystem.cs</DependentUpon>
     </Compile>
-    <Compile Include="System\ZaSystem.cs" />
+    <Compile Include="SystemInfo\ZaSystem.cs" />
     <Compile Include="Views\ZaVExpenseType.cs" />
     <Compile Include="ZaFinancialLedgerMDI.cs">
       <SubType>Form</SubType>
@@ -162,6 +169,9 @@
     <EmbeddedResource Include="Ledger Item\ZaLedgerItemDialog.resx">
       <DependentUpon>ZaLedgerItemDialog.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reference\Accounts\ZaAccountTransfer.resx">
+      <DependentUpon>ZaAccountTransfer.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reference\Budget\ZaBudgetDialog.resx">
       <DependentUpon>ZaBudgetDialog.cs</DependentUpon>
     </EmbeddedResource>
@@ -177,7 +187,7 @@
     <EmbeddedResource Include="Reference\ExpenseType\ZaExpenseTypes.resx">
       <DependentUpon>ZaExpenseTypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="System\ZaFrSystem.resx">
+    <EmbeddedResource Include="SystemInfo\ZaFrSystem.resx">
       <DependentUpon>ZaFrSystem.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ZaFinancialLedgerMDI.resx">

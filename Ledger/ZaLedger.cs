@@ -7,12 +7,13 @@ using System.Windows.Forms;
 using System.ComponentModel;
 using System.Threading;
 using FinancialLedgerProject.Accounts;
+using FinancialLedgerProject.Core;
 using FinancialLedgerProject.ExpenseType;
 using System.IO;
 using FinancialLedgerProject.Core.ExtendedObjects;
-using FinancialLedgerProject.ZaSystem;
 using FinancialLedgerProject.Reference.ExpenseType;
 using System.Collections.ObjectModel;
+using FinancialLedgerProject.SystemInfo;
 using FinancialLedgerProject.Views;
 using System.Xml.Linq;
 using FinancialLedgerProject.Reference.Budget;
@@ -23,8 +24,6 @@ public class ZaLedger
     /// System Record for the ledger
     /// </summary>
     public ZaSystem System { get; set; }
-
-    public BackgroundWorker Worker;
 
     /// <summary>
     /// Class Name
@@ -142,6 +141,7 @@ public class ZaLedger
     {
         try
         {
+            MockDb database = MockDb.Database;
             // Make it pretty
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
@@ -156,11 +156,11 @@ public class ZaLedger
             XmlWriter writer = XmlWriter.Create(LedgerFileName ?? (Directory.GetCurrentDirectory() + "\\ledger.xml"), settings);
 
             // Create a document will all the information we wish to save.
-            XDocument doc = new XDocument(new XElement(ZaLedger.C_ZaLedger, Accounts.Select(a => a.ToXElement())
-                                                  .Concat(ExpenseTypes.Select(e => e.ToXElement()))
-                                                  .Concat(SecondaryExpenseTypes.Select(se => se.ToXElement()))
-                                                  .Concat(LedgerItemList.GetFullList().Select(i => i.ToXElement()))
-                                                  .Concat(Budgets.Select(x => x.ToXElement()))
+            XDocument doc = new XDocument(new XElement(ZaLedger.C_ZaLedger, database.Accounts.Select(a => a.ToXElement())
+                                                  .Concat(database.ExpenseTypes.Select(e => e.ToXElement()))
+                                                  .Concat(database.SecondaryExpenseTypes.Select(se => se.ToXElement()))
+                                                  .Concat(database.LedgerItems.Select(i => i.ToXElement()))
+                                                  .Concat(database.Budgets.Select(x => x.ToXElement()))
                                                   ,System.ToXElement()));
             doc.WriteTo(writer);
             writer.Close();
@@ -172,199 +172,6 @@ public class ZaLedger
         }
     }
 
-    /// <summary>
-    /// Populate the accounts list
-    /// </summary>
-    public void PopulateAccounts()
-    {
-        Accounts = new ZaBindingList<ZaAccount>();
-        keyedAccounts = new Dictionary<int, ZaAccount>();
-        try
-        {
-            XDocument document = XDocument.Load(LedgerFileName);
-            var allAccounts = from c in document.Descendants(ZaAccount.C_ZaAccount)
-                    select new ZaAccount
-                    {
-
-                        //Dbseqnum = int.Parse((string)c.Element(ZaAccount.C_ZaAccount + ZaAccount.F_Dbseqnum)),
-                        //Type = (ZaAccount.AccountTypes)(int)c.Element(ZaAccount.C_ZaAccount + ZaAccount.F_Type),
-                        //Name = (string)c.Element(ZaAccount.C_ZaAccount + ZaAccount.F_Name),
-                        //OriginalBalance = (decimal)c.Element(ZaAccount.C_ZaAccount + ZaAccount.F_OriginalBalance)
-                        Dbseqnum = int.Parse((string)c.Element(ZaAccount.F_Dbseqnum)),
-                        Type = (ZaAccount.AccountTypes)(int)c.Element(ZaAccount.F_Type),
-                        Name = (string)c.Element(ZaAccount.F_Name),
-                        OriginalBalance = (decimal)c.Element(ZaAccount.F_OriginalBalance)
-                    };
-            Accounts.AddRange(allAccounts);
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.ToString());
-        }
-    }
-
-    /// <summary>
-    /// Populate expense types list
-    /// </summary>
-    public void PopulateExpenseTypes()
-    {
-        try
-        {
-            ExpenseTypes = new ZaBindingList<ZaExpenseType>();
-            SecondaryExpenseTypes = new ZaBindingList<ZaSecondaryExpenseType>();
-            XDocument document = XDocument.Load(LedgerFileName);
-            var e = from c in document.Descendants(typeof(ZaExpenseType).Name)
-                    select new ZaExpenseType
-                    {
-                        //Dbseqnum = int.Parse((string)c.Element(ZaExpenseType.C_ExpenseType + ZaExpenseType.F_Dbseqnum)),
-                        //Type = (ZaExpenseType.ExpenseTypes)(int)c.Element(ZaExpenseType.C_ExpenseType + ZaExpenseType.F_Type),
-                        //Name = (string)c.Element(ZaExpenseType.C_ExpenseType + ZaExpenseType.F_Name)
-                        Dbseqnum = (int)c.Element(ZaExpenseType.F_Dbseqnum),
-                        Type = (ZaExpenseType.ExpenseTypes)(int)c.Element(ZaExpenseType.F_Type),
-                        Name = (string)c.Element(ZaExpenseType.F_Name)
-                    };
-            ExpenseTypes.AddRange(e);
-            var se = from c in document.Descendants(typeof(ZaSecondaryExpenseType).Name)
-                     select new ZaSecondaryExpenseType
-                     {
-                         //Dbseqnum = (int)c.Element(ZaSecondaryExpenseType.C_SecondaryExpenseType + ZaSecondaryExpenseType.F_Dbseqnum),
-                         //Name = (string)c.Element(ZaSecondaryExpenseType.C_SecondaryExpenseType + ZaSecondaryExpenseType.F_Name),
-                         //dsExpenseType = ExpenseTypes.SingleOrDefault(x => x.Dbseqnum == (int)c.Element(ZaSecondaryExpenseType.C_SecondaryExpenseType + ZaSecondaryExpenseType.F_DsExpenseType))
-
-                         Dbseqnum = (int)c.Element(ZaSecondaryExpenseType.F_Dbseqnum),
-                         Name = (string)c.Element(ZaSecondaryExpenseType.F_Name),
-                         dsExpenseType = ExpenseTypes.SingleOrDefault(x => x.Dbseqnum == (int)c.Element(ZaSecondaryExpenseType.F_DsExpenseType))
-                     };
-            SecondaryExpenseTypes.AddRange(se);
-
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.ToString());
-        }
-    }
-
-    public void PopulateBudgets()
-    {
-        Budgets = new ZaBindingList<ZaBudget>();
-        try
-        {
-            XDocument loadDocument = XDocument.Load(LedgerFileName);
-            var b = from c in loadDocument.Descendants(typeof(ZaBudget).Name)
-                    select new ZaBudget
-                    {
-                        Dbseqnum = (int)c.Element(ZaBudget.F_Dbseqnum),
-                        Name = (string)c.Element(ZaBudget.F_Name),
-                        BudgetItems = c.Descendants(typeof(ZaBudgetItem).Name)
-                                       .Select(x => new ZaBudgetItem
-                                       {
-                                           Dbseqnum = (int)x.Element(ZaBudgetItem.F_Dbseqnum),
-                                           Expense = ExpenseTypes.FirstOrDefault(y => y.Dbseqnum == (int)x.Element(ZaBudgetItem.F_Expense)),
-                                           SecondaryExpense = SecondaryExpenseTypes.FirstOrDefault(y => y.Dbseqnum == (int)x.Element(ZaBudgetItem.F_SecondaryExpense)),
-                                           FlatLimit = (Decimal)x.Element(ZaBudgetItem.F_FlatLimit),
-                                           PercentLimit = (Decimal)x.Element(ZaBudgetItem.F_PercentLimit)
-                                       }).ToList()
-                    };
-            Budgets.AddRange(b);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.ToString());
-        }
-    }
-
-    /// <summary>
-    /// Populate ledger item list
-    /// </summary>
-    public void PopulateItemList()
-    {
-        try
-        {
-            XDocument loadDocument = XDocument.Load(LedgerFileName);
-            var b = from c in loadDocument.Descendants(typeof(ZaLedgerItem).Name)
-                    //let dbseqnum = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_Dbseqnum)
-                    //let description = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_Description)
-                    //let purchaseDate = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_PurchaseDate)
-                    //let purchasePrice = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_PurchasePrice)
-                    //let account = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_Account)
-                    //let expenseType = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_ExpenseType)
-                    //let secondaryExpenseType = (string)c.Element(ZaLedgerItem.C_ZaLedgerItem + ZaLedgerItem.F_SecondaryExpenseType)
-                    let dbseqnum = (string)c.Element(ZaLedgerItem.F_Dbseqnum)
-                    let description = (string)c.Element(ZaLedgerItem.F_Description)
-                    let purchaseDate = (string)c.Element(ZaLedgerItem.F_PurchaseDate)
-                    let purchasePrice = (string)c.Element(ZaLedgerItem.F_PurchasePrice)
-                    let account = (string)c.Element(ZaLedgerItem.F_Account)
-                    let expenseType = (string)c.Element(ZaLedgerItem.F_ExpenseType)
-                    let secondaryExpenseType = (string)c.Element(ZaLedgerItem.F_SecondaryExpenseType)
-                    select new ZaLedgerItem
-                    {
-                        Dbseqnum = int.Parse(dbseqnum),
-                        Description = description,
-                        PurchaseDate = DateTime.Parse(purchaseDate),
-                        PurchasePrice = Decimal.Parse(purchasePrice),
-                        Account = Accounts.SingleOrDefault(a => a.Dbseqnum.ToString() == account),
-                        ExpenseType = ExpenseTypes.SingleOrDefault(a => a.Dbseqnum.ToString() == expenseType),
-                        SecondaryExpenseType = SecondaryExpenseTypes.SingleOrDefault(x => x.Dbseqnum.ToString() == secondaryExpenseType)
-                    };
-            LedgerItemList.AddRange(b);
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.ToString());
-        }
-    }
-
-    /// <summary>
-    /// Populate the System Record for this ledger
-    /// </summary>
-    public void PopulateSystem()
-    {
-        try
-        {
-            // Always initialise the system and columnwidth dictionary
-            System = new ZaSystem();
-            XDocument loadDocument = XDocument.Load(LedgerFileName);
-            var b = from c in loadDocument.Descendants(typeof(ZaSystem).Name)
-                    select new ZaSystem
-                    {
-                        Dbseqnum = (int)c.Element(ZaLedgerItem.F_Dbseqnum),
-                        RememberGridDimensions = (bool)c.Element(ZaSystem.F_RememberGridDimensions),
-                        RememberSelectedDates = (bool)c.Element(ZaSystem.F_RememberSelectedDates),
-                        StoredDateFrom = (DateTime)c.Element(ZaSystem.F_StoredDateFrom),
-                        StoredDateTo = (DateTime)c.Element(ZaSystem.F_StoredDateTo),
-                        UseRedAsIncome = (bool)c.Element(ZaSystem.F_UseRedAsIncome),
-                        Maximised = (bool)c.Element(ZaSystem.F_Maximised),
-                        RememberMaximisedState = (bool)c.Element(ZaSystem.F_RememberMaximisedState),
-                        ColumnsWidth = (from a in c.Descendants(ZaSystem.F_ColumnWidth)
-                                        select new
-                                        {
-                                            key = new Tuple<string, string>((string)a.Element(ZaSystem.F_ColumnNameTupleOne),
-                                                                 (string)a.Element(ZaSystem.F_ColumnNameTupleTwo)),
-                                            value = (int)a.Element(ZaSystem.F_ColumnWidthValue)
-                                        }).ToDictionary(p => p.key, p => p.value)
-                        //Dbseqnum = (int)c.Element(ZaSystem.C_ZaSystem + ZaLedgerItem.F_Dbseqnum),
-                        //RememberGridDimensions = (bool)c.Element(ZaSystem.C_ZaSystem + ZaSystem.F_RememberGridDimensions),
-                        //RememberSelectedDates = (bool)c.Element(ZaSystem.C_ZaSystem + ZaSystem.F_RememberSelectedDates),
-                        //StoredDateFrom = DateTime.Parse(c.Element(ZaSystem.C_ZaSystem + ZaSystem.F_StoredDateFrom).Value),
-                        //StoredDateTo = DateTime.Parse(c.Element(ZaSystem.C_ZaSystem + ZaSystem.F_StoredDateTo).Value),
-                        //UseRedAsIncome = (bool)c.Element(ZaSystem.C_ZaSystem + ZaSystem.F_UseRedAsIncome),
-                        //ColumnsWidth = (from a in c.Descendants(ZaSystem.C_ZaSystem + ZaSystem.F_ColumnWidth)
-                        //                select new
-                        //                {
-                        //                    key = new Tuple<string, string>((string)a.Element(ZaSystem.C_ZaSystem + ZaSystem.F_ColumnNameTupleOne),
-                        //                                         (string)a.Element(ZaSystem.C_ZaSystem + ZaSystem.F_ColumnNameTupleTwo)),
-                        //                    value = (int)a.Element(ZaSystem.C_ZaSystem + ZaSystem.F_ColumnWidthValue)
-                        //                }).ToDictionary(p => p.key, p => p.value)
-
-                    };
-            System = b.SingleOrDefault();
-        }
-        catch (Exception ex)
-        {
-            MessageBox.Show(ex.ToString());
-        }
-    }
 
     /// <summary>
     /// Populate the Ledger with data from the file given
@@ -380,12 +187,10 @@ public class ZaLedger
             LedgerItemList = new ZaBindingList<ZaLedgerItem>();
             LedgerItemListSource = new BindingSource();
             LedgerItemList.RaiseListChangedEvents = false;
-            PopulateAccounts();
-            PopulateExpenseTypes();
+            MockDb.Database.LoadDatabaseFromFile(filename);
+            System = MockDb.Database.System;
+            SetupBindableListsFromDb();
             SetupOrderOfExpenseViews();
-            PopulateItemList();
-            PopulateBudgets();
-            PopulateSystem();
             LedgerItemListSource.DataSource = LedgerItemList;
             LedgerItemList.RaiseListChangedEvents = true;
         }
@@ -394,6 +199,28 @@ public class ZaLedger
             MessageBox.Show(ex.ToString());
         }
         return returnValue;
+    }
+
+    public void SetupBindableListsFromDb()
+    {
+        try
+        {
+            LedgerItemList = new ZaBindingList<ZaLedgerItem>();
+            ExpenseTypes = new ZaBindingList<ZaExpenseType>();
+            SecondaryExpenseTypes = new ZaBindingList<ZaSecondaryExpenseType>();
+            Accounts = new ZaBindingList<ZaAccount>();
+            Budgets = new ZaBindingList<ZaBudget>();
+
+            LedgerItemList.AddRange(MockDb.Database.LedgerItems);
+            ExpenseTypes.AddRange(MockDb.Database.ExpenseTypes);
+            SecondaryExpenseTypes.AddRange(MockDb.Database.SecondaryExpenseTypes);
+            Accounts.AddRange(MockDb.Database.Accounts);
+            Budgets.AddRange(MockDb.Database.Budgets);
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
     }
 
     /// <summary>
@@ -412,7 +239,7 @@ public class ZaLedger
             switch (e)
             {
                 case ZaAccount.AccountReportingTypes.Current:
-                    returnValue = account.OriginalBalance + (from ZaLedgerItem n in LedgerItemList.GetFullList()
+                    returnValue = account.OriginalBalance + (from ZaLedgerItem n in MockDb.Database.LedgerItems
                                                              where n.Account == account
                                                              select n.PurchasePrice).Sum();
                     break;
@@ -420,10 +247,10 @@ public class ZaLedger
                     returnValue = account.OriginalBalance;
                     break;
                 case ZaAccount.AccountReportingTypes.WithinRange:
-                    returnValue = (from ZaLedgerItem n in LedgerItemList.GetFullList()
+                    returnValue = (from ZaLedgerItem n in MockDb.Database.LedgerItems
                                    where n.Account == account
-                                   && (dateTo.HasValue ? n.PurchaseDate.CompareTo(dateTo) <= 0 : true)
-                                   && (dateFrom.HasValue ? n.PurchaseDate.CompareTo(dateFrom) >= 0 : true)
+                                   && (!dateTo.HasValue || n.PurchaseDate.CompareTo(dateTo) <= 0)
+                                   && (!dateFrom.HasValue || n.PurchaseDate.CompareTo(dateFrom) >= 0)
                                    select n.PurchasePrice).Sum();
 
                     break;

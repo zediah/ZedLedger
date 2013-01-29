@@ -1,32 +1,86 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
 namespace FinancialLedgerProject.Core.ExtendedObjects
 {
-    class ZaNumericTextBox : TextBox
+    public class ZaNumericTextBox : TextBox
     {
-        public ZaNumericTextBox()
+        bool allowSpace = false;
+
+        public string value = "";
+
+        // Restricts the entry of characters to digits (including hex), the negative sign,
+        // the decimal point, and editing keystrokes (backspace).
+        protected override void OnKeyPress(KeyPressEventArgs e)
         {
-            this.KeyPress += new KeyPressEventHandler(textBox1_KeyPress);
+            base.OnKeyPress(e);
+
+            NumberFormatInfo numberFormatInfo = System.Globalization.CultureInfo.CurrentCulture.NumberFormat;
+            string decimalSeparator = numberFormatInfo.NumberDecimalSeparator;
+            string groupSeparator = numberFormatInfo.NumberGroupSeparator;
+            string negativeSign = numberFormatInfo.NegativeSign;
+
+            string keyInput = e.KeyChar.ToString();
+
+            if (Char.IsDigit(e.KeyChar))
+            {
+                // Digits are OK
+            }
+            else if (keyInput.Equals(decimalSeparator) || keyInput.Equals(groupSeparator) ||
+             keyInput.Equals(negativeSign))
+            {
+                // Decimal separator is OK
+            }
+            else if (e.KeyChar == '\b')
+            {
+                // Backspace key is OK
+            }
+            //    else if ((ModifierKeys & (Keys.Control | Keys.Alt)) != 0)
+            //    {
+            //     // Let the edit control handle control and alt key combinations
+            //    }
+            else if (this.allowSpace && e.KeyChar == ' ')
+            {
+
+            }
+            else
+            {
+                // Swallow this invalid key and beep
+                e.Handled = true;
+                //    MessageBeep();
+            }
         }
 
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        public int IntValue
         {
-            if (!char.IsControl(e.KeyChar)
-                && !char.IsDigit(e.KeyChar)
-                && e.KeyChar != '.')
+            get
             {
-                e.Handled = true;
+                return Int32.Parse(this.Text);
+            }
+        }
+
+        public decimal DecimalValue
+        {
+            get
+            {
+                return Decimal.Parse(this.Text);
+            }
+        }
+
+        public bool AllowSpace
+        {
+            set
+            {
+                this.allowSpace = value;
             }
 
-            // only allow one decimal point
-            if (e.KeyChar == '.'
-                && (sender as TextBox).Text.IndexOf('.') > -1)
+            get
             {
-                e.Handled = true;
+                return this.allowSpace;
             }
         }
     }

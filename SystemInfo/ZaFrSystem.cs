@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using FinancialLedgerProject.Core;
 
-namespace FinancialLedgerProject.ZaSystem
+namespace FinancialLedgerProject.SystemInfo
 {
     public partial class ZaFrSystem : ZafrDialog
     {

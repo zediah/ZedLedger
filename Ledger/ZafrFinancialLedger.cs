@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,9 +11,10 @@ using FinancialLedgerProject.ExpenseType;
 using FinancialLedgerProject.Accounts;
 using FinancialLedgerProject.Core.ExtendedObjects;
 using FinancialLedgerProject.Reference;
-using FinancialLedgerProject.ZaSystem;
 using FinancialLedgerProject.Core;
+using FinancialLedgerProject.Reference.Accounts;
 using FinancialLedgerProject.Reference.ExpenseType;
+using FinancialLedgerProject.SystemInfo;
 using FinancialLedgerProject.Views;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -472,6 +474,8 @@ namespace FinancialLedgerProject
                 foreach (ZaAccount account in CurrentLedger.Accounts)
                 {
                     row = new DataGridViewRow();
+
+                    row.Tag = account;
 
                     cell = new DataGridViewTextBoxCell();
                     cell.Value = account.ToString();
@@ -1163,6 +1167,23 @@ namespace FinancialLedgerProject
                 ((ZafrDialog)sender).DialogResult == DialogResult.OK)
             {
 
+                // Add to DB
+                var returnValue = ((ZafrDialog)sender).returnValue;
+                var primaryObject = returnValue as PrimaryObject;
+                if (primaryObject != null)
+                {
+                    MockDb.Database.Add(primaryObject);
+                }
+
+                if (returnValue is IList)
+                {
+                    foreach (ZaLedgerItem value in (IList)returnValue)
+                    {
+                        MockDb.Database.Add(value);
+                    }
+                }
+
+                // Then add to visible list
                 var typeSwitch = new Dictionary<Type, Action>{
                     {typeof(ZaAccounts), () => CurrentLedger.Accounts = ((ZaAccounts)sender).bindingAccounts},
                     {typeof(ZaExpenseTypes), () => {CurrentLedger.ExpenseTypes = ((ZaExpenseTypes)sender).bindingExpenseTypes;
@@ -1171,6 +1192,7 @@ namespace FinancialLedgerProject
                     {typeof(ZaAccountDialog), () => CurrentLedger.Accounts.Add((ZaAccount)((ZafrDialog)sender).returnValue)},
                     {typeof(ZaExpenseTypeDialog), () => CurrentLedger.ExpenseTypes.Add((ZaExpenseType)((ZafrDialog)sender).returnValue)},
                     {typeof(ZaSecondaryExpenseTypeDialog), () => CurrentLedger.SecondaryExpenseTypes.Add((ZaSecondaryExpenseType)((ZafrDialog)sender).returnValue)},
+                    {typeof(ZaAccountTransfer), () => CurrentLedger.LedgerItemList.AddRange((List<ZaLedgerItem>)((ZafrDialog)sender).returnValue)}
                 };
 
                 typeSwitch[sender.GetType()]();
@@ -1195,7 +1217,7 @@ namespace FinancialLedgerProject
                     CurrentLedger.ExpenseTypes = new ZaBindingList<ZaExpenseType>();
                     CurrentLedger.Accounts = new ZaBindingList<ZaAccount>();
                     CurrentLedger.SecondaryExpenseTypes = new ZaBindingList<ZaSecondaryExpenseType>();
-                    CurrentLedger.System = new ZaSystem.ZaSystem();
+                    CurrentLedger.System = new ZaSystem();
                     CurrentLedger.LedgerItemListSource = new BindingSource();
                     CurrentLedger.LedgerItemListSource.DataSource = CurrentLedger.LedgerItemList;
                     CurrentLedger.SetupOrderOfExpenseViews();
@@ -2072,6 +2094,77 @@ namespace FinancialLedgerProject
             {
                 AdjustAccountStatsViewDimensions();
                 SaveColumnWidthsToSystem(zExpenseTypeStatsView);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void btnAccountTransfer_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ShowAccountTransferDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void ShowAccountTransferDialog(ZaAccount acc = null)
+        {
+            try
+            {
+                if (CurrentLedger != null)
+                {
+                    ZaAccountTransfer diag = new ZaAccountTransfer();
+                    diag.SetOriginAccount(acc);
+                    diag.FormClosing += diag_FormClosing;
+                    diag.Show();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void transferFundsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DataGridViewRow row = zAccountStatsView.SelectedRows.Cast<DataGridViewRow>().FirstOrDefault();
+                if (row != null)
+                {
+                    ZaAccount account = row.Tag as ZaAccount;
+                    if (account != null)
+                    {
+                        ShowAccountTransferDialog(account);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void zAccountStatsView_MouseDown(object sender, MouseEventArgs e)
+        {
+            try
+            {
+                if (e.Button == MouseButtons.Right)
+                {
+                    var hti = ((DataGridView) sender).HitTest(e.X, e.Y);
+                    ((DataGridView) sender).ClearSelection();
+                    if (hti.RowIndex > 0)
+                    {
+                        ((DataGridView) sender).Rows[hti.RowIndex].Selected = true;
+                    }
+                    transferFundsToolStripMenuItem.Enabled = hti.RowIndex > 0;
+                }
             }
             catch (Exception ex)
             {

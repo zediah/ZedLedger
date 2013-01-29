@@ -37,18 +37,15 @@ namespace FinancialLedgerProject
             this.mainPage = new System.Windows.Forms.TabPage();
             this.label7 = new System.Windows.Forms.Label();
             this.nameFilterTextBox = new System.Windows.Forms.TextBox();
-            this.zledgerItemListView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.zaLedgerItemsContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.removeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.monthlyData = new System.Windows.Forms.TabPage();
-            this.zBreakdownDataGridView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.filterComboBox = new System.Windows.Forms.ComboBox();
             this.typeFilterComboBox = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.budgetTab = new System.Windows.Forms.TabPage();
-            this.zaBudgetGrid = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.btnBudgetPopulate = new System.Windows.Forms.Button();
             this.btnBudgetAdd = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
@@ -68,12 +65,9 @@ namespace FinancialLedgerProject
             this.btnExpenseRemove = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.btnExpeseAdd = new System.Windows.Forms.Button();
-            this.zaExpenseTypeReferenceDGV = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.btnSubExpenseRemove = new System.Windows.Forms.Button();
             this.btnSubExpenseAdd = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
-            this.zaSecondaryExpenseReferenceDGV = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
-            this.zaAccountsReferenceDGV = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -94,20 +88,26 @@ namespace FinancialLedgerProject
             this.dateToPicker = new System.Windows.Forms.DateTimePicker();
             this.dateFromPicker = new System.Windows.Forms.DateTimePicker();
             this.splitContainerReference = new System.Windows.Forms.SplitContainer();
+            this.btnAccountTransfer = new System.Windows.Forms.Button();
             this.labelAccountSummary = new System.Windows.Forms.Label();
-            this.zAccountStatsView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
             this.labelExpenseSummary = new System.Windows.Forms.Label();
+            this.cmsAccount = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.transferFundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.zAccountStatsView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.zExpenseTypeStatsView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
+            this.zledgerItemListView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
+            this.zBreakdownDataGridView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
+            this.zaBudgetGrid = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
+            this.zaExpenseTypeReferenceDGV = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
+            this.zaSecondaryExpenseReferenceDGV = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
+            this.zaAccountsReferenceDGV = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.zaAccountBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TabControlPrimary.SuspendLayout();
             this.mainPage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zledgerItemListView)).BeginInit();
             this.zaLedgerItemsContextMenu.SuspendLayout();
             this.monthlyData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zBreakdownDataGridView)).BeginInit();
             this.budgetTab.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zaBudgetGrid)).BeginInit();
             this.importTab.SuspendLayout();
             this.groupBoxImport.SuspendLayout();
             this.setupTab.SuspendLayout();
@@ -115,18 +115,22 @@ namespace FinancialLedgerProject
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zaExpenseTypeReferenceDGV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zaSecondaryExpenseReferenceDGV)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zaAccountsReferenceDGV)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerReference)).BeginInit();
             this.splitContainerReference.Panel1.SuspendLayout();
             this.splitContainerReference.Panel2.SuspendLayout();
             this.splitContainerReference.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zAccountStatsView)).BeginInit();
             this.groupBoxDateRange.SuspendLayout();
+            this.cmsAccount.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.zAccountStatsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zExpenseTypeStatsView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zledgerItemListView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zBreakdownDataGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaBudgetGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaExpenseTypeReferenceDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaSecondaryExpenseReferenceDGV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaAccountsReferenceDGV)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zaAccountBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -182,30 +186,6 @@ namespace FinancialLedgerProject
             this.nameFilterTextBox.TabIndex = 14;
             this.nameFilterTextBox.TextChanged += new System.EventHandler(this.nameFilterTextBox_TextChanged);
             // 
-            // zledgerItemListView
-            // 
-            this.zledgerItemListView.AllowUserToOrderColumns = true;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
-            this.zledgerItemListView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.zledgerItemListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.zledgerItemListView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.zledgerItemListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zledgerItemListView.ContextMenuStrip = this.zaLedgerItemsContextMenu;
-            this.zledgerItemListView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.zledgerItemListView.Location = new System.Drawing.Point(6, 32);
-            this.zledgerItemListView.Name = "zledgerItemListView";
-            this.zledgerItemListView.reloadMethod = null;
-            this.zledgerItemListView.RowHeadersVisible = false;
-            this.zledgerItemListView.Size = new System.Drawing.Size(461, 455);
-            this.zledgerItemListView.TabIndex = 2;
-            this.zledgerItemListView.UseRedAsIncome = false;
-            this.zledgerItemListView.UseStandardStyle = true;
-            this.zledgerItemListView.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.zledgerItemListView_ColumnWidthChanged);
-            this.zledgerItemListView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.zledgerItemListView_DataError);
-            this.zledgerItemListView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.zledgerItemListView_EditingControlShowing);
-            this.zledgerItemListView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.zledgerItemListView_RowLeave);
-            // 
             // zaLedgerItemsContextMenu
             // 
             this.zaLedgerItemsContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -242,23 +222,6 @@ namespace FinancialLedgerProject
             this.monthlyData.Size = new System.Drawing.Size(476, 493);
             this.monthlyData.TabIndex = 1;
             this.monthlyData.Text = "Breakdown";
-            // 
-            // zBreakdownDataGridView
-            // 
-            this.zBreakdownDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zBreakdownDataGridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.zBreakdownDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zBreakdownDataGridView.Location = new System.Drawing.Point(5, 38);
-            this.zBreakdownDataGridView.Name = "zBreakdownDataGridView";
-            this.zBreakdownDataGridView.ReadOnly = true;
-            this.zBreakdownDataGridView.reloadMethod = null;
-            this.zBreakdownDataGridView.RowHeadersVisible = false;
-            this.zBreakdownDataGridView.Size = new System.Drawing.Size(465, 449);
-            this.zBreakdownDataGridView.TabIndex = 4;
-            this.zBreakdownDataGridView.UseRedAsIncome = false;
-            this.zBreakdownDataGridView.UseStandardStyle = true;
             // 
             // filterComboBox
             // 
@@ -311,21 +274,6 @@ namespace FinancialLedgerProject
             this.budgetTab.Size = new System.Drawing.Size(476, 493);
             this.budgetTab.TabIndex = 4;
             this.budgetTab.Text = "Budget";
-            // 
-            // zaBudgetGrid
-            // 
-            this.zaBudgetGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zaBudgetGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zaBudgetGrid.Location = new System.Drawing.Point(5, 34);
-            this.zaBudgetGrid.Name = "zaBudgetGrid";
-            this.zaBudgetGrid.reloadMethod = null;
-            this.zaBudgetGrid.Size = new System.Drawing.Size(467, 453);
-            this.zaBudgetGrid.TabIndex = 0;
-            this.zaBudgetGrid.UseRedAsIncome = false;
-            this.zaBudgetGrid.UseStandardStyle = false;
-            this.zaBudgetGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.zExpenseTypeStatsView_CellContentClick);
             // 
             // btnBudgetPopulate
             // 
@@ -530,23 +478,6 @@ namespace FinancialLedgerProject
             this.btnExpeseAdd.UseVisualStyleBackColor = true;
             this.btnExpeseAdd.Click += new System.EventHandler(this.btnExpeseAdd_Click);
             // 
-            // zaExpenseTypeReferenceDGV
-            // 
-            this.zaExpenseTypeReferenceDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zaExpenseTypeReferenceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zaExpenseTypeReferenceDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.zaExpenseTypeReferenceDGV.Location = new System.Drawing.Point(3, 24);
-            this.zaExpenseTypeReferenceDGV.Name = "zaExpenseTypeReferenceDGV";
-            this.zaExpenseTypeReferenceDGV.reloadMethod = null;
-            this.zaExpenseTypeReferenceDGV.RowHeadersVisible = false;
-            this.zaExpenseTypeReferenceDGV.Size = new System.Drawing.Size(221, 306);
-            this.zaExpenseTypeReferenceDGV.TabIndex = 0;
-            this.zaExpenseTypeReferenceDGV.UseRedAsIncome = false;
-            this.zaExpenseTypeReferenceDGV.UseStandardStyle = true;
-            this.zaExpenseTypeReferenceDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.zaExpenseTypeReferenceDGV_DataError);
-            // 
             // btnSubExpenseRemove
             // 
             this.btnSubExpenseRemove.Location = new System.Drawing.Point(135, 2);
@@ -574,38 +505,6 @@ namespace FinancialLedgerProject
             this.label5.Size = new System.Drawing.Size(102, 13);
             this.label5.TabIndex = 1;
             this.label5.Text = "Sub-Expense Types";
-            // 
-            // zaSecondaryExpenseReferenceDGV
-            // 
-            this.zaSecondaryExpenseReferenceDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zaSecondaryExpenseReferenceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zaSecondaryExpenseReferenceDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.zaSecondaryExpenseReferenceDGV.Location = new System.Drawing.Point(4, 24);
-            this.zaSecondaryExpenseReferenceDGV.Name = "zaSecondaryExpenseReferenceDGV";
-            this.zaSecondaryExpenseReferenceDGV.reloadMethod = null;
-            this.zaSecondaryExpenseReferenceDGV.RowHeadersVisible = false;
-            this.zaSecondaryExpenseReferenceDGV.Size = new System.Drawing.Size(226, 306);
-            this.zaSecondaryExpenseReferenceDGV.TabIndex = 0;
-            this.zaSecondaryExpenseReferenceDGV.UseRedAsIncome = false;
-            this.zaSecondaryExpenseReferenceDGV.UseStandardStyle = true;
-            this.zaSecondaryExpenseReferenceDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.zaSecondaryExpenseReferenceDGV_DataError);
-            // 
-            // zaAccountsReferenceDGV
-            // 
-            this.zaAccountsReferenceDGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.zaAccountsReferenceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zaAccountsReferenceDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.zaAccountsReferenceDGV.Location = new System.Drawing.Point(6, 20);
-            this.zaAccountsReferenceDGV.Name = "zaAccountsReferenceDGV";
-            this.zaAccountsReferenceDGV.reloadMethod = null;
-            this.zaAccountsReferenceDGV.RowHeadersVisible = false;
-            this.zaAccountsReferenceDGV.Size = new System.Drawing.Size(461, 128);
-            this.zaAccountsReferenceDGV.TabIndex = 1;
-            this.zaAccountsReferenceDGV.UseRedAsIncome = false;
-            this.zaAccountsReferenceDGV.UseStandardStyle = true;
             // 
             // menuStrip1
             // 
@@ -778,6 +677,7 @@ namespace FinancialLedgerProject
             // 
             // splitContainerReference.Panel1
             // 
+            this.splitContainerReference.Panel1.Controls.Add(this.btnAccountTransfer);
             this.splitContainerReference.Panel1.Controls.Add(this.labelAccountSummary);
             this.splitContainerReference.Panel1.Controls.Add(this.zAccountStatsView);
             this.splitContainerReference.Panel1.Controls.Add(this.groupBoxDateRange);
@@ -790,6 +690,16 @@ namespace FinancialLedgerProject
             this.splitContainerReference.SplitterDistance = 156;
             this.splitContainerReference.TabIndex = 23;
             // 
+            // btnAccountTransfer
+            // 
+            this.btnAccountTransfer.Location = new System.Drawing.Point(330, 16);
+            this.btnAccountTransfer.Name = "btnAccountTransfer";
+            this.btnAccountTransfer.Size = new System.Drawing.Size(75, 24);
+            this.btnAccountTransfer.TabIndex = 25;
+            this.btnAccountTransfer.Text = "Transfer";
+            this.btnAccountTransfer.UseVisualStyleBackColor = true;
+            this.btnAccountTransfer.Click += new System.EventHandler(this.btnAccountTransfer_Click);
+            // 
             // labelAccountSummary
             // 
             this.labelAccountSummary.AutoSize = true;
@@ -798,26 +708,6 @@ namespace FinancialLedgerProject
             this.labelAccountSummary.Size = new System.Drawing.Size(104, 13);
             this.labelAccountSummary.TabIndex = 20;
             this.labelAccountSummary.Text = "Account(s) Summary";
-            // 
-            // zAccountStatsView
-            // 
-            this.zAccountStatsView.AllowUserToAddRows = false;
-            this.zAccountStatsView.AllowUserToDeleteRows = false;
-            this.zAccountStatsView.AllowUserToOrderColumns = true;
-            this.zAccountStatsView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
-            this.zAccountStatsView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
-            this.zAccountStatsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.zAccountStatsView.Location = new System.Drawing.Point(3, 60);
-            this.zAccountStatsView.Name = "zAccountStatsView";
-            this.zAccountStatsView.ReadOnly = true;
-            this.zAccountStatsView.reloadMethod = null;
-            this.zAccountStatsView.RowHeadersVisible = false;
-            this.zAccountStatsView.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.zAccountStatsView.Size = new System.Drawing.Size(402, 89);
-            this.zAccountStatsView.TabIndex = 19;
-            this.zAccountStatsView.UseRedAsIncome = false;
-            this.zAccountStatsView.UseStandardStyle = true;
-            this.zAccountStatsView.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.zAccountStatsView_ColumnWidthChanged);
             // 
             // groupBoxDateRange
             // 
@@ -841,6 +731,42 @@ namespace FinancialLedgerProject
             this.labelExpenseSummary.TabIndex = 21;
             this.labelExpenseSummary.Text = "Expense(s) Summary";
             // 
+            // cmsAccount
+            // 
+            this.cmsAccount.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.transferFundsToolStripMenuItem});
+            this.cmsAccount.Name = "cmsAccount";
+            this.cmsAccount.Size = new System.Drawing.Size(153, 26);
+            // 
+            // transferFundsToolStripMenuItem
+            // 
+            this.transferFundsToolStripMenuItem.Name = "transferFundsToolStripMenuItem";
+            this.transferFundsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.transferFundsToolStripMenuItem.Text = "Transfer Funds";
+            this.transferFundsToolStripMenuItem.Click += new System.EventHandler(this.transferFundsToolStripMenuItem_Click);
+            // 
+            // zAccountStatsView
+            // 
+            this.zAccountStatsView.AllowUserToAddRows = false;
+            this.zAccountStatsView.AllowUserToDeleteRows = false;
+            this.zAccountStatsView.AllowUserToOrderColumns = true;
+            this.zAccountStatsView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.zAccountStatsView.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.zAccountStatsView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zAccountStatsView.ContextMenuStrip = this.cmsAccount;
+            this.zAccountStatsView.Location = new System.Drawing.Point(3, 60);
+            this.zAccountStatsView.Name = "zAccountStatsView";
+            this.zAccountStatsView.ReadOnly = true;
+            this.zAccountStatsView.reloadMethod = null;
+            this.zAccountStatsView.RowHeadersVisible = false;
+            this.zAccountStatsView.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.zAccountStatsView.Size = new System.Drawing.Size(402, 89);
+            this.zAccountStatsView.TabIndex = 19;
+            this.zAccountStatsView.UseRedAsIncome = false;
+            this.zAccountStatsView.UseStandardStyle = true;
+            this.zAccountStatsView.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.zAccountStatsView_ColumnWidthChanged);
+            this.zAccountStatsView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.zAccountStatsView_MouseDown);
+            // 
             // zExpenseTypeStatsView
             // 
             this.zExpenseTypeStatsView.AllowUserToAddRows = false;
@@ -863,6 +789,111 @@ namespace FinancialLedgerProject
             this.zExpenseTypeStatsView.UseStandardStyle = false;
             this.zExpenseTypeStatsView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.zExpenseTypeStatsView_CellContentClick);
             this.zExpenseTypeStatsView.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.zExpenseTypeStatsView_ColumnWidthChanged);
+            // 
+            // zledgerItemListView
+            // 
+            this.zledgerItemListView.AllowUserToOrderColumns = true;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightCyan;
+            this.zledgerItemListView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.zledgerItemListView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.zledgerItemListView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.zledgerItemListView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zledgerItemListView.ContextMenuStrip = this.zaLedgerItemsContextMenu;
+            this.zledgerItemListView.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.zledgerItemListView.Location = new System.Drawing.Point(6, 32);
+            this.zledgerItemListView.Name = "zledgerItemListView";
+            this.zledgerItemListView.reloadMethod = null;
+            this.zledgerItemListView.RowHeadersVisible = false;
+            this.zledgerItemListView.Size = new System.Drawing.Size(461, 455);
+            this.zledgerItemListView.TabIndex = 2;
+            this.zledgerItemListView.UseRedAsIncome = false;
+            this.zledgerItemListView.UseStandardStyle = true;
+            this.zledgerItemListView.ColumnWidthChanged += new System.Windows.Forms.DataGridViewColumnEventHandler(this.zledgerItemListView_ColumnWidthChanged);
+            this.zledgerItemListView.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.zledgerItemListView_DataError);
+            this.zledgerItemListView.EditingControlShowing += new System.Windows.Forms.DataGridViewEditingControlShowingEventHandler(this.zledgerItemListView_EditingControlShowing);
+            this.zledgerItemListView.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.zledgerItemListView_RowLeave);
+            // 
+            // zBreakdownDataGridView
+            // 
+            this.zBreakdownDataGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zBreakdownDataGridView.BackgroundColor = System.Drawing.SystemColors.InactiveBorder;
+            this.zBreakdownDataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zBreakdownDataGridView.Location = new System.Drawing.Point(5, 38);
+            this.zBreakdownDataGridView.Name = "zBreakdownDataGridView";
+            this.zBreakdownDataGridView.ReadOnly = true;
+            this.zBreakdownDataGridView.reloadMethod = null;
+            this.zBreakdownDataGridView.RowHeadersVisible = false;
+            this.zBreakdownDataGridView.Size = new System.Drawing.Size(465, 449);
+            this.zBreakdownDataGridView.TabIndex = 4;
+            this.zBreakdownDataGridView.UseRedAsIncome = false;
+            this.zBreakdownDataGridView.UseStandardStyle = true;
+            // 
+            // zaBudgetGrid
+            // 
+            this.zaBudgetGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zaBudgetGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zaBudgetGrid.Location = new System.Drawing.Point(5, 34);
+            this.zaBudgetGrid.Name = "zaBudgetGrid";
+            this.zaBudgetGrid.reloadMethod = null;
+            this.zaBudgetGrid.Size = new System.Drawing.Size(467, 453);
+            this.zaBudgetGrid.TabIndex = 0;
+            this.zaBudgetGrid.UseRedAsIncome = false;
+            this.zaBudgetGrid.UseStandardStyle = false;
+            this.zaBudgetGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.zExpenseTypeStatsView_CellContentClick);
+            // 
+            // zaExpenseTypeReferenceDGV
+            // 
+            this.zaExpenseTypeReferenceDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zaExpenseTypeReferenceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zaExpenseTypeReferenceDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.zaExpenseTypeReferenceDGV.Location = new System.Drawing.Point(3, 24);
+            this.zaExpenseTypeReferenceDGV.Name = "zaExpenseTypeReferenceDGV";
+            this.zaExpenseTypeReferenceDGV.reloadMethod = null;
+            this.zaExpenseTypeReferenceDGV.RowHeadersVisible = false;
+            this.zaExpenseTypeReferenceDGV.Size = new System.Drawing.Size(221, 306);
+            this.zaExpenseTypeReferenceDGV.TabIndex = 0;
+            this.zaExpenseTypeReferenceDGV.UseRedAsIncome = false;
+            this.zaExpenseTypeReferenceDGV.UseStandardStyle = true;
+            this.zaExpenseTypeReferenceDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.zaExpenseTypeReferenceDGV_DataError);
+            // 
+            // zaSecondaryExpenseReferenceDGV
+            // 
+            this.zaSecondaryExpenseReferenceDGV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zaSecondaryExpenseReferenceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zaSecondaryExpenseReferenceDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.zaSecondaryExpenseReferenceDGV.Location = new System.Drawing.Point(4, 24);
+            this.zaSecondaryExpenseReferenceDGV.Name = "zaSecondaryExpenseReferenceDGV";
+            this.zaSecondaryExpenseReferenceDGV.reloadMethod = null;
+            this.zaSecondaryExpenseReferenceDGV.RowHeadersVisible = false;
+            this.zaSecondaryExpenseReferenceDGV.Size = new System.Drawing.Size(226, 306);
+            this.zaSecondaryExpenseReferenceDGV.TabIndex = 0;
+            this.zaSecondaryExpenseReferenceDGV.UseRedAsIncome = false;
+            this.zaSecondaryExpenseReferenceDGV.UseStandardStyle = true;
+            this.zaSecondaryExpenseReferenceDGV.DataError += new System.Windows.Forms.DataGridViewDataErrorEventHandler(this.zaSecondaryExpenseReferenceDGV_DataError);
+            // 
+            // zaAccountsReferenceDGV
+            // 
+            this.zaAccountsReferenceDGV.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.zaAccountsReferenceDGV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.zaAccountsReferenceDGV.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.zaAccountsReferenceDGV.Location = new System.Drawing.Point(6, 20);
+            this.zaAccountsReferenceDGV.Name = "zaAccountsReferenceDGV";
+            this.zaAccountsReferenceDGV.reloadMethod = null;
+            this.zaAccountsReferenceDGV.RowHeadersVisible = false;
+            this.zaAccountsReferenceDGV.Size = new System.Drawing.Size(461, 128);
+            this.zaAccountsReferenceDGV.TabIndex = 1;
+            this.zaAccountsReferenceDGV.UseRedAsIncome = false;
+            this.zaAccountsReferenceDGV.UseStandardStyle = true;
             // 
             // zaAccountBindingSource
             // 
@@ -888,14 +919,11 @@ namespace FinancialLedgerProject
             this.TabControlPrimary.ResumeLayout(false);
             this.mainPage.ResumeLayout(false);
             this.mainPage.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zledgerItemListView)).EndInit();
             this.zaLedgerItemsContextMenu.ResumeLayout(false);
             this.monthlyData.ResumeLayout(false);
             this.monthlyData.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zBreakdownDataGridView)).EndInit();
             this.budgetTab.ResumeLayout(false);
             this.budgetTab.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.zaBudgetGrid)).EndInit();
             this.importTab.ResumeLayout(false);
             this.groupBoxImport.ResumeLayout(false);
             this.groupBoxImport.PerformLayout();
@@ -907,9 +935,6 @@ namespace FinancialLedgerProject
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.zaExpenseTypeReferenceDGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zaSecondaryExpenseReferenceDGV)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.zaAccountsReferenceDGV)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
@@ -920,10 +945,17 @@ namespace FinancialLedgerProject
             this.splitContainerReference.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerReference)).EndInit();
             this.splitContainerReference.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.zAccountStatsView)).EndInit();
             this.groupBoxDateRange.ResumeLayout(false);
             this.groupBoxDateRange.PerformLayout();
+            this.cmsAccount.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.zAccountStatsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zExpenseTypeStatsView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zledgerItemListView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zBreakdownDataGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaBudgetGrid)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaExpenseTypeReferenceDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaSecondaryExpenseReferenceDGV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.zaAccountsReferenceDGV)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zaAccountBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -1000,5 +1032,8 @@ namespace FinancialLedgerProject
         private System.Windows.Forms.Button btnBudgetAdd;
         private System.Windows.Forms.Button btnBudgetPopulate;
         private System.Windows.Forms.ToolStripMenuItem splitToolStripMenuItem;
+        private System.Windows.Forms.Button btnAccountTransfer;
+        private System.Windows.Forms.ContextMenuStrip cmsAccount;
+        private System.Windows.Forms.ToolStripMenuItem transferFundsToolStripMenuItem;
     }
 }

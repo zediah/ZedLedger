@@ -63,21 +63,31 @@ namespace FinancialLedgerProject.Core
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array"></param>
-        public void SetDbseqnum<T>(IEnumerable<T> array) where T: PrimaryObject
+        public void SetDbseqnum<T>() where T: PrimaryObject
         {
-            var list = array.Select(x => x.Dbseqnum);
-            if (list.Any())
+            SetDbseqnum(typeof (T));
+        }
+        
+        public void SetDbseqnum(Type t)
+        {
+            if (Dbseqnum < 1)
             {
-                // Only set the dbseqnum if it is not already set.
-                if (Dbseqnum < 1)
+                var list = MockDb.Database.GetRelatedTable(t).Cast<PrimaryObject>()
+                                                             .Select(x => x.Dbseqnum)
+                                                             .ToList();
+
+                if (list.Any())
                 {
-                   // All we need is the next value, don't re-use dbseqnums
-                    this.Dbseqnum = list.Max() + 1;
+                    // Only set the dbseqnum if it is not already set.
+
+                    // All we need is the next value, don't re-use dbseqnums
+                    Dbseqnum = list.Max() + 1;
+
                 }
-            }
-            else
-            {
-                this.Dbseqnum = 1;
+                else
+                {
+                    Dbseqnum = 1;
+                }
             }
         }
 

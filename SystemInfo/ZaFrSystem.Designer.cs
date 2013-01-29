@@ -1,4 +1,4 @@
-﻿namespace FinancialLedgerProject.ZaSystem
+﻿namespace FinancialLedgerProject.SystemInfo
 {
     partial class ZaFrSystem
     {

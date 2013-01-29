@@ -120,7 +120,7 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
                         // Set the dbseqnum when a new row is added
                         if (DataSource is IEnumerable)
                         {
-                            item.SetDbseqnum<PrimaryObject>((IEnumerable<PrimaryObject>)this.DataSource);
+                            item.SetDbseqnum<PrimaryObject>();
                         }
                     }
                 }

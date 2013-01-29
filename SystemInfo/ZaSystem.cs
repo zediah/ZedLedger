@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FinancialLedgerProject.Core;
 using System.Xml.Linq;
 using System.Windows.Forms;
 
-namespace FinancialLedgerProject.ZaSystem
+namespace FinancialLedgerProject.SystemInfo
 {
     public class ZaSystem : PrimaryObject
     {
