@@ -117,13 +117,31 @@ namespace FinancialLedgerProject.Core
                 PopulateExpenseTypes(document);
                 PopulateItemList(document);
                 PopulateBudgets(document);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        public void InitaliseDatabaseForUse()
+        {
+            try
+            {
+                Accounts = new List<ZaAccount>();
+                ExpenseTypes = new List<ZaExpenseType>();
+                SecondaryExpenseTypes = new List<ZaSecondaryExpenseType>();
+                Budgets = new List<ZaBudget>();
+                LedgerItems = new List<ZaLedgerItem>();
+                System = new ZaSystem();
+
                 CachedTypes = new Dictionary<Type, IList>();
-                CachedTypes.Add(typeof (ZaAccount), Accounts);
-                CachedTypes.Add(typeof (ZaExpenseType), ExpenseTypes);
-                CachedTypes.Add(typeof (ZaSecondaryExpenseType), SecondaryExpenseTypes);
-                CachedTypes.Add(typeof (ZaLedgerItem), LedgerItems);
-                CachedTypes.Add(typeof (ZaBudget), Budgets);
-                CachedTypes.Add(typeof (ZaBudgetItem), BudgetItems);
+                CachedTypes.Add(typeof(ZaAccount), Accounts);
+                CachedTypes.Add(typeof(ZaExpenseType), ExpenseTypes);
+                CachedTypes.Add(typeof(ZaSecondaryExpenseType), SecondaryExpenseTypes);
+                CachedTypes.Add(typeof(ZaLedgerItem), LedgerItems);
+                CachedTypes.Add(typeof(ZaBudget), Budgets);
+                CachedTypes.Add(typeof(ZaBudgetItem), BudgetItems);
             }
             catch (Exception ex)
             {
@@ -136,7 +154,6 @@ namespace FinancialLedgerProject.Core
         /// </summary>
         private void PopulateAccounts(XDocument xmlFile)
         {
-            Accounts = new List<ZaAccount>();
             try
             {
                 var allAccounts = from c in xmlFile.Descendants(ZaAccount.C_ZaAccount)
@@ -163,8 +180,6 @@ namespace FinancialLedgerProject.Core
         {
             try
             {
-                ExpenseTypes = new List<ZaExpenseType>();
-                SecondaryExpenseTypes = new List<ZaSecondaryExpenseType>();
                 var e = from c in xmlFile.Descendants(typeof(ZaExpenseType).Name)
                         select new ZaExpenseType
                         {
@@ -191,7 +206,6 @@ namespace FinancialLedgerProject.Core
 
         private void PopulateBudgets(XDocument xmlFile)
         {
-            Budgets = new List<ZaBudget>();
             try
             {
                 var b = from c in xmlFile.Descendants(typeof(ZaBudget).Name)
@@ -224,7 +238,6 @@ namespace FinancialLedgerProject.Core
         {
             try
             {
-                LedgerItems = new List<ZaLedgerItem>();
                 var b = from c in xmlFile.Descendants(typeof(ZaLedgerItem).Name)
                         let dbseqnum = (string)c.Element(ZaLedgerItem.F_Dbseqnum)
                         let description = (string)c.Element(ZaLedgerItem.F_Description)
@@ -259,7 +272,6 @@ namespace FinancialLedgerProject.Core
             try
             {
                 // Always initialise the system and columnwidth dictionary
-                System = new ZaSystem();
                 var b = from c in xmlFile.Descendants(typeof(ZaSystem).Name)
                         select new ZaSystem
                         {

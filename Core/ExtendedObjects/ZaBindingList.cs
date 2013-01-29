@@ -239,71 +239,107 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
 
         void IBindingListView.RemoveFilter()
         {
-            RaiseListChangedEvents = false;
-            isFiltered = false;
-            ClearItems();
-            AddRange(MockDb.Database.GetRelatedTable<T>());
-            FilterString = "";
-            RaiseListChangedEvents = true;
-            OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            try
+            {
+                RaiseListChangedEvents = false;
+                isFiltered = false;
+                ClearItems();
+                AddRange(MockDb.Database.GetRelatedTable<T>());
+                FilterString = "";
+                RaiseListChangedEvents = true;
+                OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         void IBindingListView.ApplySort(ListSortDescriptionCollection sorts)
         {
+            try
+            {
 
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         protected override void ApplySortCore(PropertyDescriptor prop, ListSortDirection direction)
         {
-            if (prop.PropertyType.GetInterface("IComparable") != null)
+            try
             {
-                sortPropertyCore = prop;
-                sortDirectionCore = direction;
-                ModifiedList.Clear();
-                // Prepare the modified list and preserve old list
-                ModifiedList.AddRange(Items);
-                // Call Sort on the ArrayList.
-                if (direction == ListSortDirection.Ascending)
+                if (prop.PropertyType.GetInterface("IComparable") != null)
                 {
-                    ModifiedList = ModifiedList.OrderBy(prop.GetValue).ToList();
+                    RaiseListChangedEvents = false;
+                    sortPropertyCore = prop;
+                    sortDirectionCore = direction;
+                    ModifiedList.Clear();
+                    // Prepare the modified list and preserve old list
+                    ModifiedList.AddRange(Items);
+                    // Call Sort on the ArrayList.
+                    if (direction == ListSortDirection.Ascending)
+                    {
+                        ModifiedList = ModifiedList.OrderBy(prop.GetValue).ToList();
+                    }
+                    else
+                    {
+                        ModifiedList = ModifiedList.OrderByDescending(prop.GetValue).ToList();
+                    }
+
+                    for (int i = 0; i < this.Count; i++)
+                    {
+                        this[i] = ModifiedList[i];
+                    }
+                    isSortedValue = true;
+                    RaiseListChangedEvents = true;
+                    OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
                 }
                 else
-                {
-                    ModifiedList = ModifiedList.OrderByDescending(prop.GetValue).ToList();
-                }
-
-                for (int i = 0; i < this.Count; i++)
-                {
-                    this[i] = ModifiedList[i];
-                }
-                isSortedValue = true;
-
-                OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+                    // If the property type does not implement IComparable, let the user
+                    // know.
+                    throw new NotSupportedException("Cannot sort by " + prop.Name +
+                        ". This" + prop.PropertyType.ToString() +
+                    " does not implement IComparable");
             }
-            else
-                // If the property type does not implement IComparable, let the user
-                // know.
-                throw new NotSupportedException("Cannot sort by " + prop.Name +
-                    ". This" + prop.PropertyType.ToString() +
-                " does not implement IComparable");
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         protected override void RemoveSortCore()
         {
-            isSortedValue = false;
-            OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            try
+            {
+                isSortedValue = false;
+                OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         public override void EndNew(int itemIndex)
         {
-            if (itemIndex == this.Count - 1)
+            try
             {
-                if (SortPropertyCore != null)
+                if (itemIndex == this.Count - 1)
                 {
-                    ApplySortCore(sortPropertyCore, sortDirectionCore);
+                    if (SortPropertyCore != null)
+                    {
+                        ApplySortCore(sortPropertyCore, sortDirectionCore);
+                    }
                 }
+                base.EndNew(itemIndex);
             }
-            base.EndNew(itemIndex);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -312,39 +348,67 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
         /// <param name="list"></param>
         public void AddRange(IEnumerable<T> list)
         {
-            if (list != null)
+            try
             {
-                foreach (T t in list)
+                if (list != null)
                 {
-                    Add(t);
+                    foreach (T t in list)
+                    {
+                        Add(t);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
         new public void Add(T item)
         {
-            // Set the dbseqnum if this object can have one
-            if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
+            try
             {
-                item.SetDbseqnum<T>();
+                // Set the dbseqnum if this object can have one
+                if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
+                {
+                    item.SetDbseqnum<T>();
+                }
+                base.Add(item);
             }
-            base.Add(item);
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         protected override void OnAddingNew(AddingNewEventArgs e)
         {
-            if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
+            try
             {
-                object o = Activator.CreateInstance(typeof(T));
-                e.NewObject = o;
-                MockDb.Database.Add(((T)o));
+                if (typeof(T).IsSubclassOf(typeof(PrimaryObject)))
+                {
+                    object o = Activator.CreateInstance(typeof(T));
+                    e.NewObject = o;
+                    MockDb.Database.Add(((T)o));
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
         protected override void RemoveItem(int index)
         {
-            MockDb.Database.Remove(this[index]);
-            base.RemoveItem(index);
+            try
+            {
+                MockDb.Database.Remove(this[index]);
+                base.RemoveItem(index);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         

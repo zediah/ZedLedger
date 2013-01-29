@@ -65,29 +65,43 @@ namespace FinancialLedgerProject.Core
         /// <param name="array"></param>
         public void SetDbseqnum<T>() where T: PrimaryObject
         {
-            SetDbseqnum(typeof (T));
+            try
+            {
+                SetDbseqnum(typeof(T));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
         
         public void SetDbseqnum(Type t)
         {
-            if (Dbseqnum < 1)
+            try
             {
-                var list = MockDb.Database.GetRelatedTable(t).Cast<PrimaryObject>()
-                                                             .Select(x => x.Dbseqnum)
-                                                             .ToList();
-
-                if (list.Any())
+                if (Dbseqnum < 1)
                 {
-                    // Only set the dbseqnum if it is not already set.
+                    var list = MockDb.Database.GetRelatedTable(t).Cast<PrimaryObject>()
+                                                                 .Select(x => x.Dbseqnum)
+                                                                 .ToList();
 
-                    // All we need is the next value, don't re-use dbseqnums
-                    Dbseqnum = list.Max() + 1;
+                    if (list.Any())
+                    {
+                        // Only set the dbseqnum if it is not already set.
 
+                        // All we need is the next value, don't re-use dbseqnums
+                        Dbseqnum = list.Max() + 1;
+
+                    }
+                    else
+                    {
+                        Dbseqnum = 1;
+                    }
                 }
-                else
-                {
-                    Dbseqnum = 1;
-                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -113,14 +127,21 @@ namespace FinancialLedgerProject.Core
 
         static public bool IsSubclassOfRawGeneric(Type generic, Type toCheck)
         {
-            while (toCheck != typeof(object))
+            try
             {
-                var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
-                if (generic == cur)
+                while (toCheck != typeof(object))
                 {
-                    return true;
+                    var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition() : toCheck;
+                    if (generic == cur)
+                    {
+                        return true;
+                    }
+                    toCheck = toCheck.BaseType;
                 }
-                toCheck = toCheck.BaseType;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
             return false;
         }

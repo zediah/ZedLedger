@@ -105,7 +105,7 @@ namespace FinancialLedgerProject
                     dateColumn.HeaderText = "Date";
                     dateColumn.SortMode = DataGridViewColumnSortMode.Automatic;
                     dateColumn.Name = ZaLedgerItem.F_PurchaseDate;
-                    dateColumn.Width = CurrentLedger.System.GetColumnWidth(zledgerItemListView, dateColumn);
+                    dateColumn.Width = MockDb.Database.System.GetColumnWidth(zledgerItemListView, dateColumn);
 
                     zledgerItemListView.Columns.Add(dateColumn);
 
@@ -113,7 +113,7 @@ namespace FinancialLedgerProject
                     textColumn.DataPropertyName = "Description";
                     textColumn.HeaderText = "Description";
                     textColumn.Name = ZaLedgerItem.F_Description;
-                    textColumn.Width = CurrentLedger.System.GetColumnWidth(zledgerItemListView, textColumn);
+                    textColumn.Width = MockDb.Database.System.GetColumnWidth(zledgerItemListView, textColumn);
 
 
                     zledgerItemListView.Columns.Add(textColumn);
@@ -127,7 +127,7 @@ namespace FinancialLedgerProject
                     comboColumn.MaxDropDownItems = 20;
                     comboColumn.SortMode = DataGridViewColumnSortMode.Automatic;
                     comboColumn.Name = ZaLedgerItem.F_Account;
-                    comboColumn.Width = CurrentLedger.System.GetColumnWidth(zledgerItemListView, comboColumn);
+                    comboColumn.Width = MockDb.Database.System.GetColumnWidth(zledgerItemListView, comboColumn);
 
 
                     zledgerItemListView.Columns.Add(comboColumn);
@@ -141,7 +141,7 @@ namespace FinancialLedgerProject
                     comboColumn.MaxDropDownItems = 20;
                     comboColumn.SortMode = DataGridViewColumnSortMode.Automatic;
                     comboColumn.Name = ZaLedgerItem.F_ExpenseType;
-                    comboColumn.Width = CurrentLedger.System.GetColumnWidth(zledgerItemListView, comboColumn);
+                    comboColumn.Width = MockDb.Database.System.GetColumnWidth(zledgerItemListView, comboColumn);
 
 
                     zledgerItemListView.Columns.Add(comboColumn);
@@ -155,7 +155,7 @@ namespace FinancialLedgerProject
                     comboColumn.MaxDropDownItems = 20;
                     comboColumn.SortMode = DataGridViewColumnSortMode.Automatic;
                     comboColumn.Name = ZaLedgerItem.F_SecondaryExpenseType;
-                    comboColumn.Width = CurrentLedger.System.GetColumnWidth(zledgerItemListView, comboColumn);
+                    comboColumn.Width = MockDb.Database.System.GetColumnWidth(zledgerItemListView, comboColumn);
 
                     zledgerItemListView.Columns.Add(comboColumn);
 
@@ -165,7 +165,7 @@ namespace FinancialLedgerProject
                     textColumn.HeaderText = "Price";
                     textColumn.SortMode = DataGridViewColumnSortMode.Automatic;
                     textColumn.Name = ZaLedgerItem.F_PurchasePrice;
-                    textColumn.Width = CurrentLedger.System.GetColumnWidth(zledgerItemListView, textColumn);
+                    textColumn.Width = MockDb.Database.System.GetColumnWidth(zledgerItemListView, textColumn);
 
 
                     zledgerItemListView.Columns.Add(textColumn);
@@ -202,7 +202,7 @@ namespace FinancialLedgerProject
                 buttonColumn.Width = 25;
                 buttonColumn.DefaultCellStyle.SelectionBackColor = Color.Transparent;
                 buttonColumn.Name = "Expand";
-                buttonColumn.Width = CurrentLedger.System.GetColumnWidth(zExpenseTypeStatsView, buttonColumn);
+                buttonColumn.Width = MockDb.Database.System.GetColumnWidth(zExpenseTypeStatsView, buttonColumn);
 
                 zExpenseTypeStatsView.Columns.Add(buttonColumn);
 
@@ -212,7 +212,7 @@ namespace FinancialLedgerProject
                 textColumn.DefaultCellStyle.BackColor = Color.LightSkyBlue;
                 textColumn.DefaultCellStyle.Font = new System.Drawing.Font(zExpenseTypeStatsView.Font, FontStyle.Bold);
                 textColumn.Name = ZaVExpenseType.F_ExpenseType;
-                textColumn.Width = CurrentLedger.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
+                textColumn.Width = MockDb.Database.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
 
                 zExpenseTypeStatsView.Columns.Add(textColumn);
 
@@ -220,7 +220,7 @@ namespace FinancialLedgerProject
                 textColumn.DefaultCellStyle.Format = "c";
                 textColumn.HeaderText = "Total";
                 textColumn.Name = ZaVExpenseType.F_Total;
-                textColumn.Width = CurrentLedger.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
+                textColumn.Width = MockDb.Database.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
 
                 zExpenseTypeStatsView.Columns.Add(textColumn);
 
@@ -228,7 +228,7 @@ namespace FinancialLedgerProject
                 textColumn.DefaultCellStyle.Format = "p2";
                 textColumn.HeaderText = "Percent";
                 textColumn.Name = ZaVExpenseType.F_Percent;
-                textColumn.Width = CurrentLedger.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
+                textColumn.Width = MockDb.Database.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
 
                 zExpenseTypeStatsView.Columns.Add(textColumn);
 
@@ -238,7 +238,7 @@ namespace FinancialLedgerProject
                     textColumn.DefaultCellStyle.Format = "c";
                     textColumn.HeaderText = "Total (In Range)";
                     textColumn.Name = ZaVExpenseType.F_TotalWithinPeriod;
-                    textColumn.Width = CurrentLedger.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
+                    textColumn.Width = MockDb.Database.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
 
                     zExpenseTypeStatsView.Columns.Add(textColumn);
 
@@ -246,7 +246,7 @@ namespace FinancialLedgerProject
                     textColumn.DefaultCellStyle.Format = "p2";
                     textColumn.HeaderText = "% (In Range)";
                     textColumn.Name = ZaVExpenseType.F_PercentWithinPeriod;
-                    textColumn.Width = CurrentLedger.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
+                    textColumn.Width = MockDb.Database.System.GetColumnWidth(zExpenseTypeStatsView, textColumn);
 
                     zExpenseTypeStatsView.Columns.Add(textColumn);
                 }
@@ -452,7 +452,7 @@ namespace FinancialLedgerProject
                 textColumn.HeaderText = "Account";
                 textColumn.Frozen = true;
                 textColumn.Name = ZaAccount.F_Name;
-                textColumn.Width = CurrentLedger.System.GetColumnWidth(zAccountStatsView, textColumn);
+                textColumn.Width = MockDb.Database.System.GetColumnWidth(zAccountStatsView, textColumn);
 
                 zAccountStatsView.Columns.Add(textColumn);
 
@@ -463,7 +463,7 @@ namespace FinancialLedgerProject
                         textColumn = new DataGridViewTextBoxColumn();
                         textColumn.HeaderText = n.ToString();
                         textColumn.Name = n.ToString();
-                        textColumn.Width = CurrentLedger.System.GetColumnWidth(zAccountStatsView, textColumn);
+                        textColumn.Width = MockDb.Database.System.GetColumnWidth(zAccountStatsView, textColumn);
                         
 
                         zAccountStatsView.Columns.Add(textColumn);
@@ -724,15 +724,10 @@ namespace FinancialLedgerProject
                     if (!String.IsNullOrEmpty(filename) || ledger.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                     {
                         returnValue = true;
-                        ClearBindings();
                         CurrentLedger = new ZaLedger();
                         CurrentLedger.PopulateLedger(filename ?? ledger.FileName);
-                        SetupGrid();
-                        LoadReferenceGrids();
-                        SetDefaultsFromSystem();
-                        BindControls();
-                        SetFilterTypeComboBox();
-                        FormLogic();
+                        InitaliseLedgerFrame();
+
                     }
                 }
             }
@@ -788,21 +783,21 @@ namespace FinancialLedgerProject
                 if (CurrentLedger != null)
                 {
 
-                    if (CurrentLedger.System.RememberSelectedDates)
+                    if (MockDb.Database.System.RememberSelectedDates)
                     {
-                        this.SelectedDateFrom = CurrentLedger.System.StoredDateFrom;
-                        this.SelectedDateTo = CurrentLedger.System.StoredDateTo;
-                        this.dateFromPicker.Value = CurrentLedger.System.StoredDateFrom;
-                        this.dateToPicker.Value = CurrentLedger.System.StoredDateTo;
+                        this.SelectedDateFrom = MockDb.Database.System.StoredDateFrom;
+                        this.SelectedDateTo = MockDb.Database.System.StoredDateTo;
+                        this.dateFromPicker.Value = MockDb.Database.System.StoredDateFrom;
+                        this.dateToPicker.Value = MockDb.Database.System.StoredDateTo;
                     }
                     else
                     {
                         this.SelectedDateFrom = DateTime.Today;
                         this.SelectedDateTo = DateTime.Today;
                     }
-                    if (CurrentLedger.System.RememberMaximisedState)
+                    if (MockDb.Database.System.RememberMaximisedState)
                     {
-                        this.WindowState = CurrentLedger.System.Maximised ? FormWindowState.Maximized : FormWindowState.Normal;
+                        this.WindowState = MockDb.Database.System.Maximised ? FormWindowState.Maximized : FormWindowState.Normal;
                     }
                 }
                 SetupListOfDataGridView();
@@ -823,7 +818,7 @@ namespace FinancialLedgerProject
         {
             try
             {
-                if (CurrentLedger != null && CurrentLedger.System != null)
+                if (CurrentLedger != null && MockDb.Database.System != null)
                 {
                     // If this is the first time, assume it's for everything
                     if (ctl == null) 
@@ -892,7 +887,7 @@ namespace FinancialLedgerProject
             {
                 foreach (ZaDataGridView dgv in DGVs)
                 {
-                    dgv.UseRedAsIncome = CurrentLedger.System.UseRedAsIncome;
+                    dgv.UseRedAsIncome = MockDb.Database.System.UseRedAsIncome;
                 }
             }
             catch (Exception ex)
@@ -908,14 +903,14 @@ namespace FinancialLedgerProject
         {
             try
             {
-                if (CurrentLedger.System != null && CurrentLedger.System.ColumnsWidth != null)
+                if (MockDb.Database.System != null && MockDb.Database.System.ColumnsWidth != null)
                 {
                     foreach (DataGridViewColumn col in zledgerItemListView.Columns)
                     {
                         Tuple<string, string> key = new Tuple<string, string>(zledgerItemListView.Name, col.Name);
-                        if (CurrentLedger.System.ColumnsWidth.ContainsKey(key))
+                        if (MockDb.Database.System.ColumnsWidth.ContainsKey(key))
                         {
-                            col.Width = CurrentLedger.System.ColumnsWidth[key];
+                            col.Width = MockDb.Database.System.ColumnsWidth[key];
                         }
                     }
                 }
@@ -1012,13 +1007,13 @@ namespace FinancialLedgerProject
                         foreach (DataGridViewColumn column in dgv.Columns)
                         {
                             Tuple<string, string> key = new Tuple<string, string>(dgv.Name, column.Name);
-                            if (!CurrentLedger.System.ColumnsWidth.ContainsKey(key))
+                            if (!MockDb.Database.System.ColumnsWidth.ContainsKey(key))
                             {
-                                CurrentLedger.System.ColumnsWidth.Add(key, column.Width);
+                                MockDb.Database.System.ColumnsWidth.Add(key, column.Width);
                             }
                             else
                             {
-                                CurrentLedger.System.ColumnsWidth[key] = column.Width;
+                                MockDb.Database.System.ColumnsWidth[key] = column.Width;
                             }
                         }
                 }
@@ -1039,12 +1034,12 @@ namespace FinancialLedgerProject
                 {
                     SaveColumnWidthsToSystem(DGVs);
 
-                    if (CurrentLedger.System.RememberSelectedDates)
+                    if (MockDb.Database.System.RememberSelectedDates)
                     {
-                        CurrentLedger.System.StoredDateFrom = dateFromPicker.Value;
-                        CurrentLedger.System.StoredDateTo = dateToPicker.Value;
+                        MockDb.Database.System.StoredDateFrom = dateFromPicker.Value;
+                        MockDb.Database.System.StoredDateTo = dateToPicker.Value;
                     }
-                    CurrentLedger.System.Maximised = this.WindowState == FormWindowState.Maximized;
+                    MockDb.Database.System.Maximised = this.WindowState == FormWindowState.Maximized;
                 }
             }
             catch (Exception ex)
@@ -1163,28 +1158,30 @@ namespace FinancialLedgerProject
         /// <param name="e"></param>
         void diag_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (sender is ZafrDialog &&
-                ((ZafrDialog)sender).DialogResult == DialogResult.OK)
+            try
             {
-
-                // Add to DB
-                var returnValue = ((ZafrDialog)sender).returnValue;
-                var primaryObject = returnValue as PrimaryObject;
-                if (primaryObject != null)
+                if (sender is ZafrDialog &&
+              ((ZafrDialog)sender).DialogResult == DialogResult.OK)
                 {
-                    MockDb.Database.Add(primaryObject);
-                }
 
-                if (returnValue is IList)
-                {
-                    foreach (ZaLedgerItem value in (IList)returnValue)
+                    // Add to DB
+                    var returnValue = ((ZafrDialog)sender).returnValue;
+                    var primaryObject = returnValue as PrimaryObject;
+                    if (primaryObject != null)
                     {
-                        MockDb.Database.Add(value);
+                        MockDb.Database.Add(primaryObject);
                     }
-                }
 
-                // Then add to visible list
-                var typeSwitch = new Dictionary<Type, Action>{
+                    if (returnValue is IList)
+                    {
+                        foreach (ZaLedgerItem value in (IList)returnValue)
+                        {
+                            MockDb.Database.Add(value);
+                        }
+                    }
+
+                    // Then add to visible list
+                    var typeSwitch = new Dictionary<Type, Action>{
                     {typeof(ZaAccounts), () => CurrentLedger.Accounts = ((ZaAccounts)sender).bindingAccounts},
                     {typeof(ZaExpenseTypes), () => {CurrentLedger.ExpenseTypes = ((ZaExpenseTypes)sender).bindingExpenseTypes;
                                                    CurrentLedger.SecondaryExpenseTypes = ((ZaExpenseTypes)sender).bindingSecondaryExpenseTypes;}},
@@ -1195,8 +1192,13 @@ namespace FinancialLedgerProject
                     {typeof(ZaAccountTransfer), () => CurrentLedger.LedgerItemList.AddRange((List<ZaLedgerItem>)((ZafrDialog)sender).returnValue)}
                 };
 
-                typeSwitch[sender.GetType()]();
-                SetupGrid();
+                    typeSwitch[sender.GetType()]();
+                    SetupGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -1213,23 +1215,27 @@ namespace FinancialLedgerProject
                     || MessageBox.Show("Are you sure you wish to create a new Ledger?\nThis will unload the current one", "Are you sure?", MessageBoxButtons.OKCancel) == System.Windows.Forms.DialogResult.OK)
                 {
                     CurrentLedger = new ZaLedger();
-                    CurrentLedger.LedgerItemList = new ZaBindingList<ZaLedgerItem>();
-                    CurrentLedger.ExpenseTypes = new ZaBindingList<ZaExpenseType>();
-                    CurrentLedger.Accounts = new ZaBindingList<ZaAccount>();
-                    CurrentLedger.SecondaryExpenseTypes = new ZaBindingList<ZaSecondaryExpenseType>();
-                    CurrentLedger.System = new ZaSystem();
-                    CurrentLedger.LedgerItemListSource = new BindingSource();
-                    CurrentLedger.LedgerItemListSource.DataSource = CurrentLedger.LedgerItemList;
-                    CurrentLedger.SetupOrderOfExpenseViews();
-                    ClearBindings();
-                    SetupGrid();
-                    LoadReferenceGrids();
-                    SetDefaultsFromSystem();
-                    BindControls();
-
-                    SetFilterTypeComboBox();
-                    FormLogic();
+                    CurrentLedger.InitaliseNewLedger();
+                    InitaliseLedgerFrame();
                 }
+                FormLogic();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void InitaliseLedgerFrame()
+        {
+            try
+            {
+                ClearBindings();
+                SetupGrid();
+                LoadReferenceGrids();
+                SetDefaultsFromSystem();
+                BindControls();
+                SetFilterTypeComboBox();
                 FormLogic();
             }
             catch (Exception ex)
@@ -1281,11 +1287,6 @@ namespace FinancialLedgerProject
 
                 splitContainerReference.Location = new Point(splitContainerReference.Location.X - difference, splitContainerReference.Location.Y);
                 splitContainerReference.Width += difference;
-
-                //zExpenseTypeStatsView.Location = new Point(zExpenseTypeStatsView.Location.X - difference, zExpenseTypeStatsView.Location.Y);
-
-                //zAccountStatsView.Width += difference;
-                //zAccountStatsView.Location = new Point(zAccountStatsView.Location.X - difference, zAccountStatsView.Location.Y);
             }
             catch (Exception ex)
             {
@@ -1303,16 +1304,7 @@ namespace FinancialLedgerProject
             {
                 int totalHeight = zAccountStatsView.Rows.GetRowsHeight(DataGridViewElementStates.Visible) + zAccountStatsView.ColumnHeadersHeight + SystemInformation.HorizontalScrollBarHeight;
                 int totalWidth = zAccountStatsView.Columns.GetColumnsWidth(DataGridViewElementStates.Visible) + 2;
-                //ScrollBar scroll = zAccountStatsView.GetScrollBar(ScrollBars.Horizontal);
-                //if (scroll.Visible == true)
-                //{
-                //    totalHeight += SystemInformation.HorizontalScrollBarHeight;
-                //    //scroll.Location = new Point(scroll.Location.X, zAccountStatsView.Location.Y + totalHeight);
-                //}
-                //// Change the height of the expense type box
-                //zExpenseTypeStatsView.Location = new Point(zExpenseTypeStatsView.Location.X, zExpenseTypeStatsView.Location.Y + (totalHeight - zAccountStatsView.Height));
-                //zExpenseTypeStatsView.Height += (zAccountStatsView.Height - totalHeight);
-                
+
                 zAccountStatsView.Height = totalHeight;
                 zAccountStatsView.Width = totalWidth;
                 splitContainerReference.SplitterDistance = totalHeight + 22 + groupBoxDateRange.Height;
@@ -1352,10 +1344,17 @@ namespace FinancialLedgerProject
         /// <param name="e"></param>
         private void datePicker_ValueChanged(object sender, EventArgs e)
         {
-            SelectedDateFrom = dateFromPicker.Value;
-            SelectedDateTo = dateToPicker.Value;
-            LoadAccountsStatsGrids();
-            LoadExpenseTypeStatsGrids();
+            try
+            {
+                SelectedDateFrom = dateFromPicker.Value;
+                SelectedDateTo = dateToPicker.Value;
+                LoadAccountsStatsGrids();
+                LoadExpenseTypeStatsGrids();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         /// <summary>
@@ -1383,7 +1382,14 @@ namespace FinancialLedgerProject
         /// <param name="e"></param>
         private void AccountHorizontalScrollbarVisibilityChanged(object sender, EventArgs e)
         {
-            AdjustAccountStatsViewDimensions();
+            try
+            {
+                AdjustAccountStatsViewDimensions();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
 
@@ -1528,7 +1534,7 @@ namespace FinancialLedgerProject
                 if (CurrentLedger != null)
                 {
                     ZaFrSystem diag = new ZaFrSystem();
-                    diag.SystemReference = CurrentLedger.System;
+                    diag.SystemReference = MockDb.Database.System;
                     diag.FormClosing += new FormClosingEventHandler(diag_FormClosing);
                     diag.Show();
                 }
@@ -1601,23 +1607,37 @@ namespace FinancialLedgerProject
 
         private void nameFilterTextBox_TextChanged(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(nameFilterTextBox.Text))
+            try
             {
-                CurrentLedger.LedgerItemListSource.Filter = "Description LIKE " + nameFilterTextBox.Text;
+                if (!string.IsNullOrWhiteSpace(nameFilterTextBox.Text))
+                {
+                    CurrentLedger.LedgerItemListSource.Filter = "Description LIKE " + nameFilterTextBox.Text;
+                }
+                else
+                {
+                    CurrentLedger.LedgerItemListSource.Filter = "";
+                    LoadExpenseTypeStatsGrids();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                CurrentLedger.LedgerItemListSource.Filter = "";
-                LoadExpenseTypeStatsGrids();
+                MessageBox.Show(ex.ToString());
             }
         }
 
         private void ZafrFinancialLedger_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CurrentLedger != null)
+            try
             {
-                Settings.Default.LastUsedLedger = CurrentLedger.LedgerFileName;
-                Settings.Default.Save();
+                if (CurrentLedger != null)
+                {
+                    Settings.Default.LastUsedLedger = CurrentLedger.LedgerFileName;
+                    Settings.Default.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
 
@@ -1841,25 +1861,31 @@ namespace FinancialLedgerProject
         /// <param name="e"></param>
         private void tabControlDataDisplay_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (TabControlPrimary.SelectedIndex)
+            try
             {
-                case 0:
-                    SetupGrid();
-                    break;
-                case 1:
-                    LoadBreakdownGrid();
-                    break;
-                case 2:
-                    LoadBudgetGrid();
-                    break;
-                case 3:
+                switch (TabControlPrimary.SelectedIndex)
+                {
+                    case 0:
+                        SetupGrid();
+                        break;
+                    case 1:
+                        LoadBreakdownGrid();
+                        break;
+                    case 2:
+                        LoadBudgetGrid();
+                        break;
+                    case 3:
 
-                    break;
-                case 4:
-                    
-                    break;
+                        break;
+                    case 4:
+
+                        break;
+                }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
         private void zaSecondaryExpenseReferenceDGV_DataError(object sender, DataGridViewDataErrorEventArgs e)

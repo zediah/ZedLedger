@@ -21,11 +21,6 @@ using FinancialLedgerProject.Reference.Budget;
 public class ZaLedger
 {
     /// <summary>
-    /// System Record for the ledger
-    /// </summary>
-    public ZaSystem System { get; set; }
-
-    /// <summary>
     /// Class Name
     /// </summary>
     public const string C_ZaLedger = "ZaLedger";
@@ -125,14 +120,6 @@ public class ZaLedger
         PopulateLedger(filename);
     }
 
-    ~ZaLedger()
-    {
-        if (System != null)
-        {
-
-        }
-    }
-
     /// <summary>
     /// Save the Ledger to the filename given
     /// </summary>
@@ -161,7 +148,7 @@ public class ZaLedger
                                                   .Concat(database.SecondaryExpenseTypes.Select(se => se.ToXElement()))
                                                   .Concat(database.LedgerItems.Select(i => i.ToXElement()))
                                                   .Concat(database.Budgets.Select(x => x.ToXElement()))
-                                                  ,System.ToXElement()));
+                                                  , database.System.ToXElement()));
             doc.WriteTo(writer);
             writer.Close();
             
@@ -183,14 +170,11 @@ public class ZaLedger
         bool returnValue = true;
         try
         {
+            InitaliseNewLedger();
             LedgerFileName = filename;
-            LedgerItemList = new ZaBindingList<ZaLedgerItem>();
-            LedgerItemListSource = new BindingSource();
-            LedgerItemList.RaiseListChangedEvents = false;
             MockDb.Database.LoadDatabaseFromFile(filename);
-            System = MockDb.Database.System;
-            SetupBindableListsFromDb();
-            SetupOrderOfExpenseViews();
+            LedgerItemList.RaiseListChangedEvents = false;
+            UpdateBindableListsWithDb();
             LedgerItemListSource.DataSource = LedgerItemList;
             LedgerItemList.RaiseListChangedEvents = true;
         }
@@ -201,21 +185,40 @@ public class ZaLedger
         return returnValue;
     }
 
-    public void SetupBindableListsFromDb()
+    /// <summary>
+    /// Creates a blank ledger, to be done on creation of a ledger
+    /// </summary>
+    public void InitaliseNewLedger()
     {
         try
         {
+            MockDb.Database.InitaliseDatabaseForUse();
             LedgerItemList = new ZaBindingList<ZaLedgerItem>();
             ExpenseTypes = new ZaBindingList<ZaExpenseType>();
             SecondaryExpenseTypes = new ZaBindingList<ZaSecondaryExpenseType>();
             Accounts = new ZaBindingList<ZaAccount>();
             Budgets = new ZaBindingList<ZaBudget>();
+            LedgerItemListSource = new BindingSource();
 
+            SetupOrderOfExpenseViews();
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(ex.ToString());
+        }
+
+    }
+
+    public void UpdateBindableListsWithDb()
+    {
+        try
+        {
             LedgerItemList.AddRange(MockDb.Database.LedgerItems);
             ExpenseTypes.AddRange(MockDb.Database.ExpenseTypes);
             SecondaryExpenseTypes.AddRange(MockDb.Database.SecondaryExpenseTypes);
             Accounts.AddRange(MockDb.Database.Accounts);
             Budgets.AddRange(MockDb.Database.Budgets);
+
         }
         catch (Exception ex)
         {

@@ -140,7 +140,6 @@ namespace FinancialLedgerProject.Core.ExtendedObjects
             // 
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
-
         }
 
 
