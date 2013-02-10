@@ -218,7 +218,6 @@ public class ZaLedger
             SecondaryExpenseTypes.AddRange(MockDb.Database.SecondaryExpenseTypes);
             Accounts.AddRange(MockDb.Database.Accounts);
             Budgets.AddRange(MockDb.Database.Budgets);
-
         }
         catch (Exception ex)
         {

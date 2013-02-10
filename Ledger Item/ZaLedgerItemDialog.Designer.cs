@@ -55,6 +55,7 @@
             // 
             // purchasePriceNumeric
             // 
+            this.purchasePriceNumeric.AllowSpace = false;
             this.purchasePriceNumeric.Location = new System.Drawing.Point(151, 6);
             this.purchasePriceNumeric.Name = "purchasePriceNumeric";
             this.purchasePriceNumeric.Size = new System.Drawing.Size(114, 20);
@@ -170,6 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.ClientSize = new System.Drawing.Size(365, 248);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.purchasePriceNumeric);

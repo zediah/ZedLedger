@@ -14,8 +14,6 @@ namespace FinancialLedgerProject.ExpenseType
 {
     public partial class ZaSecondaryExpenseTypeDialog : ZafrDialog
     {
-        public List<ZaExpenseType> ExpenseTypes { get; set; }
-
         public ZaSecondaryExpenseTypeDialog()
         {
             InitializeComponent();
@@ -32,7 +30,7 @@ namespace FinancialLedgerProject.ExpenseType
 
         private void ZaExpenseTypeDialog_Load(object sender, EventArgs e)
         {
-            typeComboBox.DataSource = ExpenseTypes;
+            typeComboBox.DataSource = MockDb.Database.ExpenseTypes;
             typeComboBox.DisplayMember = "Name";
             typeComboBox.ValueMember = "Self";
         }

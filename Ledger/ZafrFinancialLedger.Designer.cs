@@ -90,10 +90,10 @@ namespace FinancialLedgerProject
             this.splitContainerReference = new System.Windows.Forms.SplitContainer();
             this.btnAccountTransfer = new System.Windows.Forms.Button();
             this.labelAccountSummary = new System.Windows.Forms.Label();
-            this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
-            this.labelExpenseSummary = new System.Windows.Forms.Label();
             this.cmsAccount = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.transferFundsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.groupBoxDateRange = new System.Windows.Forms.GroupBox();
+            this.labelExpenseSummary = new System.Windows.Forms.Label();
             this.zAccountStatsView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.zExpenseTypeStatsView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
             this.zledgerItemListView = new FinancialLedgerProject.Core.ExtendedObjects.ZaDataGridView();
@@ -121,8 +121,8 @@ namespace FinancialLedgerProject
             this.splitContainerReference.Panel1.SuspendLayout();
             this.splitContainerReference.Panel2.SuspendLayout();
             this.splitContainerReference.SuspendLayout();
-            this.groupBoxDateRange.SuspendLayout();
             this.cmsAccount.SuspendLayout();
+            this.groupBoxDateRange.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.zAccountStatsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zExpenseTypeStatsView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.zledgerItemListView)).BeginInit();
@@ -148,6 +148,7 @@ namespace FinancialLedgerProject
             this.TabControlPrimary.Controls.Add(this.importTab);
             this.TabControlPrimary.Controls.Add(this.setupTab);
             this.TabControlPrimary.Location = new System.Drawing.Point(3, 27);
+            this.TabControlPrimary.Multiline = true;
             this.TabControlPrimary.Name = "TabControlPrimary";
             this.TabControlPrimary.SelectedIndex = 0;
             this.TabControlPrimary.Size = new System.Drawing.Size(484, 519);
@@ -156,7 +157,8 @@ namespace FinancialLedgerProject
             // 
             // mainPage
             // 
-            this.mainPage.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.mainPage.BackColor = System.Drawing.Color.Transparent;
+            this.mainPage.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.mainPage.Controls.Add(this.label7);
             this.mainPage.Controls.Add(this.nameFilterTextBox);
             this.mainPage.Controls.Add(this.zledgerItemListView);
@@ -170,6 +172,7 @@ namespace FinancialLedgerProject
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.Transparent;
             this.label7.Location = new System.Drawing.Point(6, 9);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 13);
@@ -211,6 +214,7 @@ namespace FinancialLedgerProject
             // monthlyData
             // 
             this.monthlyData.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.monthlyData.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.monthlyData.Controls.Add(this.zBreakdownDataGridView);
             this.monthlyData.Controls.Add(this.filterComboBox);
             this.monthlyData.Controls.Add(this.typeFilterComboBox);
@@ -244,6 +248,7 @@ namespace FinancialLedgerProject
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(230, 14);
             this.label2.Name = "label2";
@@ -254,6 +259,7 @@ namespace FinancialLedgerProject
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Location = new System.Drawing.Point(8, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(31, 13);
@@ -263,6 +269,7 @@ namespace FinancialLedgerProject
             // budgetTab
             // 
             this.budgetTab.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.budgetTab.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.budgetTab.Controls.Add(this.zaBudgetGrid);
             this.budgetTab.Controls.Add(this.btnBudgetPopulate);
             this.budgetTab.Controls.Add(this.btnBudgetAdd);
@@ -298,6 +305,7 @@ namespace FinancialLedgerProject
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
             this.label8.Location = new System.Drawing.Point(6, 13);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(44, 13);
@@ -315,6 +323,7 @@ namespace FinancialLedgerProject
             // importTab
             // 
             this.importTab.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.importTab.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.importTab.Controls.Add(this.groupBoxImport);
             this.importTab.Location = new System.Drawing.Point(4, 22);
             this.importTab.Name = "importTab";
@@ -325,6 +334,7 @@ namespace FinancialLedgerProject
             // 
             // groupBoxImport
             // 
+            this.groupBoxImport.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.groupBoxImport.Controls.Add(this.textBox1);
             this.groupBoxImport.Controls.Add(this.btnImportFileDialog);
             this.groupBoxImport.Controls.Add(this.btnGenerateImport);
@@ -365,6 +375,7 @@ namespace FinancialLedgerProject
             // 
             // label6
             // 
+            this.label6.BackColor = System.Drawing.Color.Transparent;
             this.label6.Location = new System.Drawing.Point(6, 16);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(234, 61);
@@ -384,7 +395,8 @@ namespace FinancialLedgerProject
             // 
             // setupTab
             // 
-            this.setupTab.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.setupTab.BackColor = System.Drawing.Color.Transparent;
+            this.setupTab.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.setupTab.Controls.Add(this.btnAccountRemove);
             this.setupTab.Controls.Add(this.btnAccountAdd);
             this.setupTab.Controls.Add(this.label3);
@@ -419,6 +431,7 @@ namespace FinancialLedgerProject
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Location = new System.Drawing.Point(3, 4);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 13);
@@ -435,6 +448,7 @@ namespace FinancialLedgerProject
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.splitContainer1.Panel1.Controls.Add(this.btnExpenseRemove);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
             this.splitContainer1.Panel1.Controls.Add(this.btnExpeseAdd);
@@ -442,6 +456,7 @@ namespace FinancialLedgerProject
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.splitContainer1.Panel2.Controls.Add(this.btnSubExpenseRemove);
             this.splitContainer1.Panel2.Controls.Add(this.btnSubExpenseAdd);
             this.splitContainer1.Panel2.Controls.Add(this.label5);
@@ -462,6 +477,7 @@ namespace FinancialLedgerProject
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Location = new System.Drawing.Point(3, 5);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(80, 13);
@@ -500,6 +516,7 @@ namespace FinancialLedgerProject
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Location = new System.Drawing.Point(1, 6);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(102, 13);
@@ -508,6 +525,8 @@ namespace FinancialLedgerProject
             // 
             // menuStrip1
             // 
+            this.menuStrip1.BackColor = System.Drawing.Color.Navy;
+            this.menuStrip1.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.debut_dark;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.settingsToolStripMenuItem});
@@ -528,15 +547,17 @@ namespace FinancialLedgerProject
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
             this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.fileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.newToolStripMenuItem.Text = "New";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.btnNewButton_Click);
             // 
@@ -545,7 +566,7 @@ namespace FinancialLedgerProject
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.btnOpenItemList_Click);
             // 
@@ -553,7 +574,7 @@ namespace FinancialLedgerProject
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.btnSaveItemList_Click);
             // 
@@ -562,19 +583,19 @@ namespace FinancialLedgerProject
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.saveAsToolStripMenuItem.Text = "Save As..";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.btnSaveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(189, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(197, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(192, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(200, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.btnExitToolStripMenuItem_Click);
             // 
@@ -583,24 +604,27 @@ namespace FinancialLedgerProject
             this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.optionsToolStripMenuItem,
             this.toolStripSeparator3});
+            this.settingsToolStripMenuItem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             // 
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(117, 22);
             this.optionsToolStripMenuItem.Text = "Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.btnSettingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(113, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(114, 6);
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.debut_dark;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripProgressBar1,
@@ -613,8 +637,11 @@ namespace FinancialLedgerProject
             // 
             // toolStripStatusLabel1
             // 
+            this.toolStripStatusLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.toolStripStatusLabel1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripStatusLabel1.ForeColor = System.Drawing.Color.White;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(39, 17);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(42, 17);
             this.toolStripStatusLabel1.Text = "Status";
             // 
             // toolStripProgressBar1
@@ -632,6 +659,7 @@ namespace FinancialLedgerProject
             // dateToLabel
             // 
             this.dateToLabel.AutoSize = true;
+            this.dateToLabel.BackColor = System.Drawing.Color.Transparent;
             this.dateToLabel.Location = new System.Drawing.Point(158, 16);
             this.dateToLabel.Name = "dateToLabel";
             this.dateToLabel.Size = new System.Drawing.Size(49, 13);
@@ -641,6 +669,7 @@ namespace FinancialLedgerProject
             // dateFromLabel
             // 
             this.dateFromLabel.AutoSize = true;
+            this.dateFromLabel.BackColor = System.Drawing.Color.Transparent;
             this.dateFromLabel.Location = new System.Drawing.Point(6, 16);
             this.dateFromLabel.Name = "dateFromLabel";
             this.dateFromLabel.Size = new System.Drawing.Size(59, 13);
@@ -670,6 +699,7 @@ namespace FinancialLedgerProject
             this.splitContainerReference.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainerReference.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.splitContainerReference.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.splitContainerReference.Location = new System.Drawing.Point(490, 49);
             this.splitContainerReference.Name = "splitContainerReference";
@@ -677,6 +707,8 @@ namespace FinancialLedgerProject
             // 
             // splitContainerReference.Panel1
             // 
+            this.splitContainerReference.Panel1.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainerReference.Panel1.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.splitContainerReference.Panel1.Controls.Add(this.btnAccountTransfer);
             this.splitContainerReference.Panel1.Controls.Add(this.labelAccountSummary);
             this.splitContainerReference.Panel1.Controls.Add(this.zAccountStatsView);
@@ -684,6 +716,8 @@ namespace FinancialLedgerProject
             // 
             // splitContainerReference.Panel2
             // 
+            this.splitContainerReference.Panel2.BackColor = System.Drawing.Color.Transparent;
+            this.splitContainerReference.Panel2.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.splitContainerReference.Panel2.Controls.Add(this.labelExpenseSummary);
             this.splitContainerReference.Panel2.Controls.Add(this.zExpenseTypeStatsView);
             this.splitContainerReference.Size = new System.Drawing.Size(408, 493);
@@ -692,7 +726,7 @@ namespace FinancialLedgerProject
             // 
             // btnAccountTransfer
             // 
-            this.btnAccountTransfer.Location = new System.Drawing.Point(330, 16);
+            this.btnAccountTransfer.Location = new System.Drawing.Point(312, 13);
             this.btnAccountTransfer.Name = "btnAccountTransfer";
             this.btnAccountTransfer.Size = new System.Drawing.Size(75, 24);
             this.btnAccountTransfer.TabIndex = 25;
@@ -703,33 +737,12 @@ namespace FinancialLedgerProject
             // labelAccountSummary
             // 
             this.labelAccountSummary.AutoSize = true;
+            this.labelAccountSummary.BackColor = System.Drawing.Color.Transparent;
             this.labelAccountSummary.Location = new System.Drawing.Point(4, 44);
             this.labelAccountSummary.Name = "labelAccountSummary";
             this.labelAccountSummary.Size = new System.Drawing.Size(104, 13);
             this.labelAccountSummary.TabIndex = 20;
             this.labelAccountSummary.Text = "Account(s) Summary";
-            // 
-            // groupBoxDateRange
-            // 
-            this.groupBoxDateRange.Controls.Add(this.dateFromLabel);
-            this.groupBoxDateRange.Controls.Add(this.dateFromPicker);
-            this.groupBoxDateRange.Controls.Add(this.dateToLabel);
-            this.groupBoxDateRange.Controls.Add(this.dateToPicker);
-            this.groupBoxDateRange.Location = new System.Drawing.Point(3, 0);
-            this.groupBoxDateRange.Name = "groupBoxDateRange";
-            this.groupBoxDateRange.Size = new System.Drawing.Size(303, 41);
-            this.groupBoxDateRange.TabIndex = 24;
-            this.groupBoxDateRange.TabStop = false;
-            this.groupBoxDateRange.Text = "Specified Date Range";
-            // 
-            // labelExpenseSummary
-            // 
-            this.labelExpenseSummary.AutoSize = true;
-            this.labelExpenseSummary.Location = new System.Drawing.Point(3, 4);
-            this.labelExpenseSummary.Name = "labelExpenseSummary";
-            this.labelExpenseSummary.Size = new System.Drawing.Size(105, 13);
-            this.labelExpenseSummary.TabIndex = 21;
-            this.labelExpenseSummary.Text = "Expense(s) Summary";
             // 
             // cmsAccount
             // 
@@ -744,6 +757,30 @@ namespace FinancialLedgerProject
             this.transferFundsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.transferFundsToolStripMenuItem.Text = "Transfer Funds";
             this.transferFundsToolStripMenuItem.Click += new System.EventHandler(this.transferFundsToolStripMenuItem_Click);
+            // 
+            // groupBoxDateRange
+            // 
+            this.groupBoxDateRange.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
+            this.groupBoxDateRange.Controls.Add(this.dateFromLabel);
+            this.groupBoxDateRange.Controls.Add(this.dateFromPicker);
+            this.groupBoxDateRange.Controls.Add(this.dateToLabel);
+            this.groupBoxDateRange.Controls.Add(this.dateToPicker);
+            this.groupBoxDateRange.Location = new System.Drawing.Point(3, 0);
+            this.groupBoxDateRange.Name = "groupBoxDateRange";
+            this.groupBoxDateRange.Size = new System.Drawing.Size(303, 41);
+            this.groupBoxDateRange.TabIndex = 24;
+            this.groupBoxDateRange.TabStop = false;
+            this.groupBoxDateRange.Text = "Specified Date Range";
+            // 
+            // labelExpenseSummary
+            // 
+            this.labelExpenseSummary.AutoSize = true;
+            this.labelExpenseSummary.BackColor = System.Drawing.Color.Transparent;
+            this.labelExpenseSummary.Location = new System.Drawing.Point(3, 4);
+            this.labelExpenseSummary.Name = "labelExpenseSummary";
+            this.labelExpenseSummary.Size = new System.Drawing.Size(105, 13);
+            this.labelExpenseSummary.TabIndex = 21;
+            this.labelExpenseSummary.Text = "Expense(s) Summary";
             // 
             // zAccountStatsView
             // 
@@ -903,7 +940,8 @@ namespace FinancialLedgerProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.LightSteelBlue;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::FinancialLedgerProject.Properties.Resources.subtle_grunge;
             this.ClientSize = new System.Drawing.Size(910, 571);
             this.Controls.Add(this.splitContainerReference);
             this.Controls.Add(this.statusStrip1);
@@ -945,9 +983,9 @@ namespace FinancialLedgerProject
             this.splitContainerReference.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerReference)).EndInit();
             this.splitContainerReference.ResumeLayout(false);
+            this.cmsAccount.ResumeLayout(false);
             this.groupBoxDateRange.ResumeLayout(false);
             this.groupBoxDateRange.PerformLayout();
-            this.cmsAccount.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.zAccountStatsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zExpenseTypeStatsView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.zledgerItemListView)).EndInit();

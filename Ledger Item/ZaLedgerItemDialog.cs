@@ -20,11 +20,6 @@ namespace FinancialLedgerProject.Ledger_Item
         public ZaLedgerItem LedgerItem { get; set; }
 
         /// <summary>
-        /// The ledger, kind of the database in this instance
-        /// </summary>
-        public ZaLedger Ledger { get; set; }
-
-        /// <summary>
         /// The maximum value the ledger item may be 
         /// </summary>
         public decimal MaxItemValue { get; set; }
@@ -98,6 +93,22 @@ namespace FinancialLedgerProject.Ledger_Item
             secondaryExpenseTypeCombo.SelectedItem = null;
             // Now set up the data source
             secondaryExpenseTypeCombo.DataSource = MockDb.Database.SecondaryExpenseTypes.Where(x => x.dsExpenseType == expense).ToList();
+        }
+
+        public override void InitaliseCustomDialogSettings(params object[] args)
+        {
+            try
+            {
+                var li = args.ElementAtOrDefault(0) as ZaLedgerItem;
+                if (li != null)
+                {
+                    LedgerItem = li;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
         }
 
     }

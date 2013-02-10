@@ -72,6 +72,7 @@ namespace FinancialLedgerProject.Accounts
             // 
             // originalBalanceTextBox
             // 
+            this.originalBalanceTextBox.AllowSpace = false;
             this.originalBalanceTextBox.Location = new System.Drawing.Point(191, 25);
             this.originalBalanceTextBox.Name = "originalBalanceTextBox";
             this.originalBalanceTextBox.Size = new System.Drawing.Size(169, 20);
@@ -81,6 +82,7 @@ namespace FinancialLedgerProject.Accounts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(371, 88);
             this.Controls.Add(this.originalBalanceTextBox);
             this.Controls.Add(this.label2);

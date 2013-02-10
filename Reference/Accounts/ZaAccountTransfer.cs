@@ -69,10 +69,11 @@ namespace FinancialLedgerProject.Reference.Accounts
         public override void okButton_Click(object sender, EventArgs e)
         {
             var fullItemList = new List<ZaLedgerItem>();
-            var originAccount = (ZaAccount)comboOriginalAccount.SelectedItem;
-            var throughAccount = (ZaAccount)comboThroughAccount.SelectedItem;
-            var destinationAccount = (ZaAccount)comboDestinationAccount.SelectedItem;
+            var originAccount = (ZaAccount) comboOriginalAccount.SelectedItem;
+            var throughAccount = (ZaAccount) comboThroughAccount.SelectedItem;
+            var destinationAccount = (ZaAccount) comboDestinationAccount.SelectedItem;
             var amount = Decimal.Parse(textBox1.Text);
+            var dateOfTransfer = dateTimeDateOfTransfer.Value;
 
             if (originAccount != null && destinationAccount != null && amount > 0)
             {
@@ -82,6 +83,7 @@ namespace FinancialLedgerProject.Reference.Accounts
                 originItem.Description = "Transfer from [" + originAccount + "] to [" +
                                          (throughAccount ?? destinationAccount) + "]";
                 originItem.PurchasePrice = amount;
+                originItem.PurchaseDate = dateOfTransfer;
                 fullItemList.Add(originItem);
 
                 if (throughAccount != null)
@@ -91,6 +93,7 @@ namespace FinancialLedgerProject.Reference.Accounts
                     throughItemRecieved.Account = throughAccount;
                     throughItemRecieved.Description = "Transfer Recieved from [" + originAccount + "]";
                     throughItemRecieved.PurchasePrice = -amount;
+                    throughItemRecieved.PurchaseDate = dateOfTransfer;
                     fullItemList.Add(throughItemRecieved);
 
                     var throughItemForwarded = new ZaLedgerItem();
@@ -98,6 +101,7 @@ namespace FinancialLedgerProject.Reference.Accounts
                     throughItemForwarded.Account = throughAccount;
                     throughItemForwarded.Description = "Forwarding Transfer to [" + destinationAccount + "]";
                     throughItemForwarded.PurchasePrice = amount;
+                    throughItemForwarded.PurchaseDate = dateOfTransfer;
                     fullItemList.Add(throughItemForwarded);
                 }
 
@@ -106,6 +110,7 @@ namespace FinancialLedgerProject.Reference.Accounts
                 destinationItem.Account = destinationAccount;
                 destinationItem.Description = "Transfer Recieved from [" + (throughAccount ?? destinationAccount) + "]";
                 destinationItem.PurchasePrice = -amount;
+                destinationItem.PurchaseDate = dateOfTransfer;
                 fullItemList.Add(destinationItem);
 
                 returnValue = fullItemList;
@@ -118,7 +123,24 @@ namespace FinancialLedgerProject.Reference.Accounts
                 MessageBox.Show("An origin account, destination account and amount are required as a minimum.",
                                 "Required Fields", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
         }
+
+
+        public override void InitaliseCustomDialogSettings(params object[] args)
+        {
+            try
+            {
+                ZaAccount acc = args.ElementAtOrDefault(0) as ZaAccount;
+                if (acc != null)
+                {
+                    SetOriginAccount(acc);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
     }
 }

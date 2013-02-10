@@ -803,6 +803,7 @@ namespace FinancialLedgerProject
                 SetupListOfDataGridView();
                 SetupDataGridViewFromSystem();
                 SetupDataGridViews();
+                SetColumnDefaultsFromSystem();
             }
             catch (Exception ex)
             {
@@ -818,21 +819,18 @@ namespace FinancialLedgerProject
         {
             try
             {
-                if (CurrentLedger != null && MockDb.Database.System != null)
+                // If this is the first time, assume it's for everything
+                if (ctl == null)
+                    ctl = this;
+                foreach (Control con in ctl.Controls)
                 {
-                    // If this is the first time, assume it's for everything
-                    if (ctl == null) 
-                        ctl = this;
-                    foreach (Control con in ctl.Controls)
+                    if (ctl is ZaDataGridView)
                     {
-                        if (ctl is ZaDataGridView)
-                        {
-                            DGVs.Add((ZaDataGridView)ctl);
-                        }
-                        else
-                        {
-                            SetupListOfDataGridView(con);
-                        }
+                        DGVs.Add((ZaDataGridView) ctl);
+                    }
+                    else
+                    {
+                        SetupListOfDataGridView(con);
                     }
                 }
             }
@@ -1160,24 +1158,29 @@ namespace FinancialLedgerProject
         {
             try
             {
+                // Only if the user has pressed "OK" do we want this run.
                 if (sender is ZafrDialog &&
-              ((ZafrDialog)sender).DialogResult == DialogResult.OK)
+              ((ZafrDialog)sender).DialogResult == DialogResult.OK && e.CloseReason == CloseReason.UserClosing)
                 {
 
-                    // Add to DB
-                    var returnValue = ((ZafrDialog)sender).returnValue;
-                    var primaryObject = returnValue as PrimaryObject;
-                    if (primaryObject != null)
-                    {
-                        MockDb.Database.Add(primaryObject);
-                    }
+                    // Add to DB, this lets the type flow through properly
+                    dynamic returnValue = ((ZafrDialog)sender).returnValue;
 
-                    if (returnValue is IList)
+                    // If we were given a list, process the list instead of a single item
+                    if (returnValue is IEnumerable)
                     {
-                        foreach (ZaLedgerItem value in (IList)returnValue)
+                        foreach (dynamic value in (IEnumerable)returnValue)
                         {
                             MockDb.Database.Add(value);
                         }
+                    }
+                    else
+                    {
+                        if (returnValue != null)
+                        {
+                            MockDb.Database.Add(returnValue);
+                        }
+
                     }
 
                     // Then add to visible list
@@ -1192,8 +1195,12 @@ namespace FinancialLedgerProject
                     {typeof(ZaAccountTransfer), () => CurrentLedger.LedgerItemList.AddRange((List<ZaLedgerItem>)((ZafrDialog)sender).returnValue)}
                 };
 
-                    typeSwitch[sender.GetType()]();
+                    if (typeSwitch.ContainsKey(sender.GetType()))
+                    {
+                        typeSwitch[sender.GetType()]();
+                    }
                     SetupGrid();
+
                 }
             }
             catch (Exception ex)
@@ -1907,12 +1914,7 @@ namespace FinancialLedgerProject
         {
             try
             {
-                if (CurrentLedger != null)
-                {
-                    ZaAccountDialog diag = new ZaAccountDialog();
-                    diag.FormClosing += new FormClosingEventHandler(diag_FormClosing);
-                    diag.ShowDialog();
-                }
+               ShowCustomDialog<ZaAccountDialog>();
             }
             catch (Exception ex)
             {
@@ -1929,12 +1931,8 @@ namespace FinancialLedgerProject
         {
             try
             {
-                if (CurrentLedger != null)
-                {
-                    ZaExpenseTypeDialog diag = new ZaExpenseTypeDialog();
-                    diag.FormClosing += new FormClosingEventHandler(diag_FormClosing);
-                    diag.Show();
-                }
+                ShowCustomDialog<ZaExpenseTypeDialog>();
+
             }
             catch (Exception ex)
             {
@@ -1949,13 +1947,7 @@ namespace FinancialLedgerProject
         /// <param name="e"></param>
         private void btnSubExpenseAdd_Click(object sender, EventArgs e)
         {
-            if (CurrentLedger != null)
-            {
-                ZaSecondaryExpenseTypeDialog diag = new ZaSecondaryExpenseTypeDialog();
-                diag.ExpenseTypes = CurrentLedger.ExpenseTypes.ToList();
-                diag.FormClosing += new FormClosingEventHandler(diag_FormClosing);
-                diag.Show();
-            }
+            ShowCustomDialog<ZaSecondaryExpenseTypeDialog>();
         }
 
         /// <summary>
@@ -2026,11 +2018,7 @@ namespace FinancialLedgerProject
         {
             try
             {
-                ZaBudgetDialog budgetDiag = new ZaBudgetDialog();
-                if (budgetDiag.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    CurrentLedger.Budgets.Add((ZaBudget)budgetDiag.returnValue);
-                }
+                ShowCustomDialog<ZaBudgetDialog>();
             }
             catch (Exception ex)
             {
@@ -2077,12 +2065,8 @@ namespace FinancialLedgerProject
                     {
                         ZaLedgerItem newItem = new ZaLedgerItem(ledgerItem);
 
-                        ZaLedgerItemDialog dialog = new ZaLedgerItemDialog();
-                        dialog.LedgerItem = newItem;
-                        dialog.Ledger = CurrentLedger;
-                        dialog.ShowDialog();
+                        newItem = ShowCustomDialog<ZaLedgerItemDialog>(newItem) as ZaLedgerItem;
 
-                        newItem = (ZaLedgerItem)dialog.returnValue;
                         if (newItem != null)
                         {
                             CurrentLedger.LedgerItemList.Add(newItem);
@@ -2131,25 +2115,7 @@ namespace FinancialLedgerProject
         {
             try
             {
-                ShowAccountTransferDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-        }
-
-        private void ShowAccountTransferDialog(ZaAccount acc = null)
-        {
-            try
-            {
-                if (CurrentLedger != null)
-                {
-                    ZaAccountTransfer diag = new ZaAccountTransfer();
-                    diag.SetOriginAccount(acc);
-                    diag.FormClosing += diag_FormClosing;
-                    diag.Show();
-                }
+                ShowCustomDialog<ZaAccountTransfer>();
             }
             catch (Exception ex)
             {
@@ -2167,7 +2133,7 @@ namespace FinancialLedgerProject
                     ZaAccount account = row.Tag as ZaAccount;
                     if (account != null)
                     {
-                        ShowAccountTransferDialog(account);
+                        ShowCustomDialog<ZaAccountTransfer>(account);
                     }
                 }
             }
@@ -2177,6 +2143,31 @@ namespace FinancialLedgerProject
             }
         }
 
+        private object ShowCustomDialog<T>(params object[] args) where T : ZafrDialog, new() 
+        {
+            object returnValue = null;
+            try
+            {
+                var dialog = new T();
+                dialog.InitaliseCustomDialogSettings(args);
+                dialog.FormClosing += new FormClosingEventHandler(diag_FormClosing);
+                dialog.Owner = this;
+                dialog.ShowDialog();
+
+                returnValue = dialog.returnValue;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            return returnValue;
+        }
+
+        /// <summary>
+        /// Method to select the row and enable context items for that row
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void zAccountStatsView_MouseDown(object sender, MouseEventArgs e)
         {
             try
@@ -2185,11 +2176,11 @@ namespace FinancialLedgerProject
                 {
                     var hti = ((DataGridView) sender).HitTest(e.X, e.Y);
                     ((DataGridView) sender).ClearSelection();
-                    if (hti.RowIndex > 0)
+                    if (hti.RowIndex >= 0)
                     {
                         ((DataGridView) sender).Rows[hti.RowIndex].Selected = true;
                     }
-                    transferFundsToolStripMenuItem.Enabled = hti.RowIndex > 0;
+                    transferFundsToolStripMenuItem.Enabled = hti.RowIndex >= 0;
                 }
             }
             catch (Exception ex)

@@ -13,6 +13,7 @@ namespace FinancialLedgerProject.Core
     {
         public object returnValue { get; set; }
 
+
         public ZafrDialog()
         {
             InitializeComponent();
@@ -36,8 +37,9 @@ namespace FinancialLedgerProject.Core
                 }
                 if (filled)
                 {
-                    this.DialogResult = DialogResult.OK;
-                    this.Close();
+                    DialogResult = DialogResult.OK;
+                    LightBox.Lightbox.Hide();
+                    Close();
                 }
                 else
                 {
@@ -54,8 +56,9 @@ namespace FinancialLedgerProject.Core
         {
             try
             {
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
+                DialogResult = DialogResult.Cancel;
+                LightBox.Lightbox.Hide();
+                Close();
             }
             catch (Exception ex)
             {
@@ -65,6 +68,14 @@ namespace FinancialLedgerProject.Core
 
         private void ZafrDialog_Load(object sender, EventArgs e)
         {
+            if (Owner != null)
+            {
+                LightBox.Lightbox.SetBounds(Owner.Left + 8, Owner.Top + 30, Owner.ClientRectangle.Width,
+                                   Owner.ClientRectangle.Height);
+                LightBox.Lightbox.Owner = Owner;
+                LightBox.Lightbox.Show();
+                this.BringToFront();
+            }
             foreach (Control c in Controls)
             {
                 if (c.TabIndex == 0)
@@ -72,6 +83,11 @@ namespace FinancialLedgerProject.Core
                     c.Focus();
                 }
             }
+        }
+
+        public virtual void InitaliseCustomDialogSettings(params object[] args)
+        {
+            // Empty, to be overridden
         }
     }
 }
